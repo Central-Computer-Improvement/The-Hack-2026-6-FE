@@ -34,3 +34,45 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+```
+ai-learning-platform
+├─ components.json
+├─ eslint.config.mjs
+├─ next.config.ts
+├─ package-lock.json
+├─ package.json
+├─ postcss.config.mjs
+├─ Product Requirements Document-kelompok6.md
+├─ public
+│  ├─ assets
+│  │  └─ images
+│  ├─ file.svg
+│  ├─ globe.svg
+│  ├─ next.svg
+│  ├─ vercel.svg
+│  └─ window.svg
+├─ README.md
+├─ src
+│  ├─ app
+│  │  ├─ favicon.ico
+│  │  ├─ globals.css
+│  │  ├─ layout.tsx
+│  │  └─ page.tsx
+│  ├─ components
+│  │  ├─ atoms -> komponen dasar (Button, Input, Typography, komponen bawaan shadcn)
+│  │  ├─ molecules -> gabungan atom (SearchBar, ChatInput dengan tombol kirim)
+│  │  ├─ organisms -> bagian UI besar (VideoPlayer, ChatWidget, NodeMap)
+│  │  ├─ templates -> struktur tata letak (DashboardLayout, LearningLayout)
+│  │  └─ ui
+│  │     └─ button.tsx
+│  ├─ constants -> buat nyimpen data statis/variabel konfigurasi (contoh: palet warna, error message, atau dummy data sementara)
+│  ├─ hooks -> buat fetching data nantinya
+│  ├─ lib -> buat utility (helper) ky utils.ts untuk Tailwind merge (bawaan shadcn) atau formatter tanggal dan waktu
+│  │  └─ utils.ts
+│  ├─ store -> nyimpen state management global
+│  └─ types -> file TypeScript (.ts atau .d.ts) untuk definisi interface ky tipe data untuk response API dari Backend, tipe data untuk User, atau component property 
+├─ tsconfig.json
+└─ workflow-git.md -> copy code ke https://markdownlivepreview.com/ biar enak bacanya
+
+```
