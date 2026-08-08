@@ -34,6 +34,7 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
 ## Project tree
+
 ```
 ai-learning-platform
 ├─ components.json
@@ -59,19 +60,22 @@ ai-learning-platform
 │  │  ├─ layout.tsx
 │  │  └─ page.tsx
 │  ├─ components
-│  │  ├─ atoms -> komponen dasar (Button, Input, Typography, komponen bawaan shadcn)
-│  │  ├─ molecules -> gabungan atom (SearchBar, ChatInput dengan tombol kirim)
-│  │  ├─ organisms -> bagian UI besar (VideoPlayer, ChatWidget, NodeMap)
-│  │  ├─ templates -> struktur tata letak (DashboardLayout, LearningLayout)
+│  │  ├─ atoms
+│  │  ├─ molecules
+│  │  ├─ organisms
+│  │  ├─ templates
 │  │  └─ ui
 │  │     └─ button.tsx
-│  ├─ constants -> buat nyimpen data statis/variabel konfigurasi (contoh: palet warna, error message, atau dummy data sementara)
-│  ├─ hooks -> buat fetching data nantinya
-│  ├─ lib -> buat utility (helper) ky utils.ts untuk Tailwind merge (bawaan shadcn) atau formatter tanggal dan waktu
+│  ├─ constants
+│  │  └─ mockData.ts
+│  ├─ hooks
+│  ├─ lib
 │  │  └─ utils.ts
-│  ├─ store -> nyimpen state management global
-│  └─ types -> file TypeScript (.ts atau .d.ts) untuk definisi interface ky tipe data untuk response API dari Backend, tipe data untuk User, atau component property 
+│  ├─ store
+│  │  └─ useAuthStore.ts
+│  └─ types
+├─ tailwind.config.ts
 ├─ tsconfig.json
-└─ workflow-git.md -> copy code ke https://markdownlivepreview.com/ biar enak bacanya
+└─ workflow-git.md
 
 ```

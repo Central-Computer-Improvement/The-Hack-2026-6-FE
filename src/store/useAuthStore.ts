@@ -18,10 +18,10 @@ interface AuthState {
 export const useAuthStore = create<AuthState>((set, get) => ({
     user: null, // default saat belum login
   
-    // dummy untuk mock login selama backend belum ada
+    // dummy mock login selama backend belum ada
     login: (userData) => set({ user: userData }),
     logout: () => set({ user: null }),
   
-    // helper function agar lebih mudah dicek di komponen
+    // helper function biat gampang dicek di komponen
     isAdmin: () => get().user?.role === 'admin',
 }));
