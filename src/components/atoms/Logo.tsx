@@ -1,6 +1,8 @@
 import * as React from "react";
 import { Bot } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Heading, Text } from "@/components/atoms/Typography";
+
 
 export interface LogoProps extends React.HTMLAttributes<HTMLDivElement> {
   showText?: boolean;
@@ -21,9 +23,9 @@ export const Logo = React.forwardRef<HTMLDivElement, LogoProps>(
         
         {/* Teks Logo */}
         {showText && (
-          <span className="font-sans text-lg font-bold tracking-tight text-primary">
+          <Heading level={1} variant="display-hero">
             AI Learning
-          </span>
+          </Heading>
         )}
       </div>
     );
