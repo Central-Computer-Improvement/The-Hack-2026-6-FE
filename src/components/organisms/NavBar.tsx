@@ -1,38 +1,21 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-import { Menu, Flame, Coins, Bell } from "lucide-react";
-import { motion } from "framer-motion";
-
+import { Menu, Flame, Coins, Space } from "lucide-react";
 import { useUIStore } from "@/store/useUIStore";
 import { MOCK_PROFILE } from "@/constants/mockData";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { StatIndicator } from "@/components/atoms/StatsIndicator";
-import { Heading } from "@/components/atoms/Typography";
 import { IconButton } from "@/components/atoms/IconButton";
 
-// Fungsi helper route URL sesuai Halaman
-const getPageTitle = (pathname: string) => {
-  if (pathname.includes("/dashboard")) return "Dashboard";
-  if (pathname.includes("/roadmap")) return "AI Roadmap";
-  if (pathname.includes("/study-buddy")) return "AI Study Buddy";
-  if (pathname.includes("/library")) return "Library";
-  if (pathname.includes("/admin/create-course")) return "Create Course";
-  return "Welcome Back!"; // Default fallback
-};
-
 export default function Navbar() {
-  const pathname = usePathname();
   const { openMobileSidebar } = useUIStore();
-  const pageTitle = getPageTitle(pathname || "");
 
   return (
-    <header className="sticky top-0 z-40 flex h-16 w-full items-center justify-between border-b border-border bg-card px-4 md:px-6 shadow-sm transition-all">
+    <header className="sticky top-0 z-40 flex h-16 w-full items-center justify-between bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-4 md:px-8 transition-all">
       
-      {/* AREA KIRI: Hamburger Menu & Judul Halaman */}
+      {/* AREA KIRI: Hamburger Menu & Brand Name */}
       <div className="flex items-center gap-3">
-        {/* hanya di layar Mobile & Tablet */}
         <div className="md:hidden">
           <IconButton 
             icon={Menu} 
@@ -42,34 +25,16 @@ export default function Navbar() {
           />
         </div>
         
-        {/* container */}
-        <div className="relative flex h-full items-center">
-          <Heading level={1} variant="h5" className="text-primary tracking-tight">
-            {pageTitle}
-          </Heading>
-          
-          {/* Animasi Sliding Border */}
-          <motion.div
-            layoutId="navbar-active-border"
-            className="absolute -bottom-[21px] left-0 h-[3px] w-full rounded-t-md bg-indigo-base"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-          />
-        </div>
+        <span className="font-sans text-xl font-extrabold tracking-tight text-primary md:text-2xl">
+          AuraLearn
+        </span>
       </div>
 
 
-      {/* AREA KANAN: Gamification Stats & Profil */}
-      <div className="flex items-center gap-3 sm:gap-4">
-        
-        {/* Indikator Streak */}
-        <StatIndicator 
-          icon={Flame} 
-          value={`${MOCK_PROFILE.currentStreak} Days`} 
-          iconClassName="text-orange-500 fill-orange-500 animate-pulse"
-          className="hidden sm:flex" 
-        />
+      {/* =========================================
+          AREA KANAN: Gamification Stats & Profil
+          ========================================= */}
+      <div className="flex items-center gap-2 sm:gap-4">
         
         {/* Indikator Poin */}
         <StatIndicator 
@@ -77,20 +42,19 @@ export default function Navbar() {
           value={MOCK_PROFILE.totalPoints.toLocaleString("id-ID")} 
         />
 
+        {/* Indikator Streak */}
+        <StatIndicator 
+          icon={Flame} 
+          value={`${MOCK_PROFILE.currentStreak} Days`}
+          iconClassName="text-orange-500 fill-orange-500"
+        />
+
         {/* Separator Visual */}
         <div className="hidden h-6 w-px bg-border sm:block"></div>
-
-        {/* Tombol Notifikasi */}
-        <IconButton 
-          icon={Bell} 
-          variant="ghost" 
-          iconSize={20} 
-          className="hidden sm:flex h-10 w-10 text-muted-foreground hover:text-primary" 
-        />
         
-        {/* Avatar Profil Siswa */}
-        <Avatar className="h-10 w-10 border-2 border-transparent cursor-pointer hover:border-indigo-base transition-colors">
-          <AvatarImage src="" alt={MOCK_PROFILE.name} />
+        {/* Avatar Siswa */}
+        <Avatar className="h-10 w-10 shrink-0 border-2 border-transparent cursor-pointer hover:border-indigo-base shadow-sm transition-all hover:scale-105">
+          <AvatarImage src={MOCK_PROFILE.avatar} alt={MOCK_PROFILE.name} className="object-cover" />
           <AvatarFallback className="bg-indigo-base text-white font-bold">
             {MOCK_PROFILE.name.charAt(0)}
           </AvatarFallback>

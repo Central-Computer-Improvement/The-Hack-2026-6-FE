@@ -11,6 +11,7 @@ export interface SubjectMastery {
 }
 
 export interface UserProfile {
+  avatar: string | Blob | undefined;
   id: string;
   name: string;
   role: Role;
