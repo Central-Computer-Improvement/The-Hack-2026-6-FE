@@ -40,11 +40,7 @@ export default function Navbar() {
         />
         <StatIndicator 
           icon={Flame} 
-          value={
-            <>
-              {MOCK_PROFILE.currentStreak} <span className="hidden sm:inline">Days</span>
-            </>
-          } 
+          value={`${MOCK_PROFILE.currentStreak} Days`} 
           iconClassName="text-orange-500 fill-orange-500"
         />
         <div className="hidden h-6 w-px bg-border sm:block"></div>
