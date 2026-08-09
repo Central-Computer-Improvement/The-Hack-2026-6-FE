@@ -2,12 +2,15 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Map, Bot, BookOpen, PlusCircle, LogOut } from "lucide-react";
+import { LayoutDashboard, Map, Bot, BookOpen, PlusCircle, LogOut, Coins } from "lucide-react";
 import { useUIStore } from "@/store/useUIStore";
 // import { useAuthStore } from "@/store/useAuthStore"; 
 
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { StatIndicator } from "@/components/atoms/StatsIndicator"; 
+import { MOCK_PROFILE } from "@/constants/mockData";
 
 // --- KONFIGURASI MENU ---
 const MAIN_MENU = [
@@ -80,8 +83,33 @@ export default function Sidebar() {
         )}
       </div>
 
-      <div className="p-4 border-t border-border">
-        <Button variant="ghost" className="w-full justify-start gap-3 text-muted-foreground hover:text-destructive">
+      <div className="p-4 border-t border-border flex flex-col gap-4">
+        
+        {/* Info Profil & Poin */}
+        <div className="flex items-center gap-3 px-2">
+          <Avatar className="h-10 w-10 border border-border">
+            <AvatarImage src="" alt={MOCK_PROFILE.name} />
+            <AvatarFallback className="bg-indigo-soft text-indigo-base font-bold">
+              {MOCK_PROFILE.name.charAt(0)}
+            </AvatarFallback>
+          </Avatar>
+          
+          <div className="flex flex-col items-start gap-1">
+            <span className="text-sm font-bold text-foreground">
+              {MOCK_PROFILE.name}
+            </span>
+            <StatIndicator 
+              icon={Coins} 
+              value={MOCK_PROFILE.totalPoints.toLocaleString("id-ID")} 
+            />
+          </div>
+        </div>
+
+        {/* 2. Tombol Logout */}
+        <Button 
+          variant="ghost" 
+          className="w-full justify-start gap-3 text-muted-foreground hover:bg-red-50 hover:text-destructive"
+        >
           <LogOut className="w-5 h-5" />
           <span>Logout</span>
         </Button>

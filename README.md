@@ -35,6 +35,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## Project tree
 
+
 ```
 ai-learning-platform
 ├─ components.json
@@ -61,18 +62,37 @@ ai-learning-platform
 │  │  └─ page.tsx
 │  ├─ components
 │  │  ├─ atoms
+│  │  │  ├─ IconButton.tsx
+│  │  │  ├─ Logo.tsx
+│  │  │  ├─ PulseDot.tsx
+│  │  │  ├─ StatsIndicator.tsx
+│  │  │  └─ Typography.tsx
 │  │  ├─ molecules
 │  │  ├─ organisms
+│  │  │  └─ SideBar.tsx
 │  │  ├─ templates
 │  │  └─ ui
-│  │     └─ button.tsx
+│  │     ├─ avatar.tsx
+│  │     ├─ badge.tsx
+│  │     ├─ button.tsx
+│  │     ├─ card.tsx
+│  │     ├─ checkbox.tsx
+│  │     ├─ dialog.tsx
+│  │     ├─ input.tsx
+│  │     ├─ progress.tsx
+│  │     ├─ select.tsx
+│  │     ├─ separator.tsx
+│  │     ├─ sheet.tsx
+│  │     ├─ tabs.tsx
+│  │     └─ textarea.tsx
 │  ├─ constants
 │  │  └─ mockData.ts
 │  ├─ hooks
 │  ├─ lib
 │  │  └─ utils.ts
 │  ├─ store
-│  │  └─ useAuthStore.ts
+│  │  ├─ useAuthStore.ts
+│  │  └─ useUIStore.ts
 │  └─ types
 ├─ tailwind.config.ts
 ├─ tsconfig.json
