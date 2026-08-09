@@ -1,5 +1,5 @@
 /// TYPES & INTERFACES (Definisi Struktur Data)
-export type Role = "student" | "admin" | "parents ";
+export type Role = "student" | "admin" ;
 export type NodeStatus = "locked" | "in-progress" | "completed";
 export type ChatRole = "user" | "ai";
 
@@ -66,6 +66,7 @@ export const MOCK_PROFILE: UserProfile = {
       isNew: false,
     },
   ],
+  avatar: undefined
 };
 
 // 2. data AI Study Buddy
