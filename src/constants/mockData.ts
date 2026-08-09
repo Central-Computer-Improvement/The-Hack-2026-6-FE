@@ -1,5 +1,5 @@
 /// TYPES & INTERFACES (Definisi Struktur Data)
-export type Role = "student" | "admin";
+export type Role = "student" | "admin" | "parents ";
 export type NodeStatus = "locked" | "in-progress" | "completed";
 export type ChatRole = "user" | "ai";
 

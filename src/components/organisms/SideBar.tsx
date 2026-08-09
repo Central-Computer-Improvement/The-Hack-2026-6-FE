@@ -2,48 +2,47 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Map, Bot, BookOpen, PlusCircle, LogOut, Coins } from "lucide-react";
+import { 
+  Map, 
+  Bot, 
+  BookOpen, 
+  LayoutDashboard, 
+  Settings, 
+  HelpCircle 
+} from "lucide-react";
 import { useUIStore } from "@/store/useUIStore";
 // import { useAuthStore } from "@/store/useAuthStore"; 
 
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { StatIndicator } from "@/components/atoms/StatsIndicator"; 
-import { MOCK_PROFILE } from "@/constants/mockData";
+import { ProfileIdentity } from "@/components/molecules/ProfileIdentity";
 
 // --- KONFIGURASI MENU ---
 const MAIN_MENU = [
-  { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-  { name: "AI Roadmap", href: "/roadmap", icon: Map },
+  { name: "Roadmap", href: "/roadmap", icon: Map },
   { name: "Study Buddy", href: "/study-buddy", icon: Bot },
   { name: "Library", href: "/library", icon: BookOpen },
+  { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
 ];
 
 export default function Sidebar() {
   const pathname = usePathname();
   const { isMobileSidebarOpen, closeMobileSidebar } = useUIStore();
-  
-  const isAdmin = true; 
 
   const renderSidebarContent = () => (
     <div className="flex h-full flex-col bg-card border-r border-border text-foreground">
-      <div className="flex h-16 items-center px-6 border-b border-border">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-full bg-indigo-base flex items-center justify-center">
-            <Bot className="w-5 h-5 text-white" />
-          </div>
-          <span className="text-lg font-bold text-primary font-sans">
-            AI Learning
-          </span>
-        </div>
+      <div className="flex items-center justify-center pt-8 pb-6 px-6 border-b border-border">
+        <ProfileIdentity 
+          name="Professor Paw"
+          role="Your Learning Co-pilot"
+          avatarSrc="/assets/images/professor-paw.png" 
+          orientation="vertical"
+          size="lg"
+        />
       </div>
 
+      {/* RENDER LIST MENU */}
       <div className="flex-1 overflow-y-auto py-6 px-4 space-y-1">
-        <p className="px-2 text-xs font-bold text-muted-foreground uppercase tracking-wider mb-4">
-          Menu Utama
-        </p>
-        
         {MAIN_MENU.map((item) => {
           const isActive = pathname === item.href;
           return (
@@ -61,58 +60,30 @@ export default function Sidebar() {
             </Link>
           );
         })}
-
-        {isAdmin && (
-          <div className="mt-8 pt-6 border-t border-border">
-            <p className="px-2 text-xs font-bold text-muted-foreground uppercase tracking-wider mb-4">
-              Admin Panel
-            </p>
-            <Link href="/admin/create-course" onClick={closeMobileSidebar}>
-              <div
-                className={`flex items-center gap-3 px-3 py-3 rounded-btn transition-all duration-200 ${
-                  pathname === "/admin/create-course"
-                    ? "bg-amber-soft text-amber-dark font-bold"
-                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                }`}
-              >
-                <PlusCircle className="w-5 h-5" />
-                <span className="text-body-medium">Create Course</span>
-              </div>
-            </Link>
-          </div>
-        )}
       </div>
 
-      <div className="p-4 border-t border-border flex flex-col gap-4">
+      {/* --- FOOTER SIDEBAR  --- */}
+      <div className="p-4 border-t border-border flex flex-col gap-2">
         
-        {/* Info Profil & Poin */}
-        <div className="flex items-center gap-3 px-2">
-          <Avatar className="h-10 w-10 border border-border">
-            <AvatarImage src="" alt={MOCK_PROFILE.name} />
-            <AvatarFallback className="bg-indigo-soft text-indigo-base font-bold">
-              {MOCK_PROFILE.name.charAt(0)}
-            </AvatarFallback>
-          </Avatar>
-          
-          <div className="flex flex-col items-start gap-1">
-            <span className="text-sm font-bold text-foreground">
-              {MOCK_PROFILE.name}
-            </span>
-            <StatIndicator 
-              icon={Coins} 
-              value={MOCK_PROFILE.totalPoints.toLocaleString("id-ID")} 
-            />
-          </div>
-        </div>
-
-        {/* 2. Tombol Logout */}
+        {/* CTA */}
         <Button 
-          variant="ghost" 
-          className="w-full justify-start gap-3 text-muted-foreground hover:bg-red-50 hover:text-destructive"
+          className="w-full mb-2 h-14 bg-indigo-base hover:bg-indigo-700 text-white rounded-btn shadow-sm text-base font-bold"
         >
-          <LogOut className="w-5 h-5" />
-          <span>Logout</span>
+          Start Quiz
         </Button>
+        
+        {/* Settings (Ghost) */}
+        <Button variant="ghost" className="w-full justify-start gap-3 text-muted-foreground hover:text-foreground hover:bg-muted">
+          <Settings className="w-5 h-5" />
+          <span className="text-body-medium">Settings</span>
+        </Button>
+        
+        {/* Help (Ghost) */}
+        <Button variant="ghost" className="w-full justify-start gap-3 text-muted-foreground hover:text-foreground hover:bg-muted">
+          <HelpCircle className="w-5 h-5" />
+          <span className="text-body-medium">Help</span>
+        </Button>
+        
       </div>
     </div>
   );
