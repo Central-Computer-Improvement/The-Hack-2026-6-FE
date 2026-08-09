@@ -1,17 +1,52 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-jakarta), system-ui, sans-serif;
+  /* =========================================
+     TYPOGRAPHY
+     ========================================= */
+  --font-sans: var(--font-nunito), system-ui, sans-serif;
   
-  /* Warna Kustom Sesuai Desain UI/UX */
-  --color-indigo-base: #6366f1;
-  --color-indigo-hover: #4f46e5;
-  --color-indigo-soft: #e0e7ff;
-  --color-indigo-mid: #818cf8;
+  /* =========================================
+     PRIMARY COLOR (Smart AI Indigo)
+     ========================================= */
+  --color-indigo-base: #6C5CE7;
+  --color-indigo-dark: #4834D4;
+  --color-indigo-mid: #A29BFE;
+  --color-indigo-soft: #F0EEFF;
+
+  /* =========================================
+     SECONDARY COLOR (Gamification Amber/Gold)
+     ========================================= */
+  --color-amber-base: #FF9F43;
+  --color-amber-dark: #E67E22;
+  --color-amber-mid: #FECA57;
+  --color-amber-soft: #FFF9EC;
+
+  /* =========================================
+     NEUTRAL COLORS & SYSTEM
+     ========================================= */
+  --color-background: #F8F9FD;
+  --color-foreground: #2D3436;
+  --color-card: #FFFFFF;
+  --color-muted: #636E72;
+  --color-border: #E2E8F0;
+
+  /* =========================================
+     BORDER RADIUS (Touch-friendly UX)
+     ========================================= */
+  --radius-btn: 12px;
+  --radius-card: 20px;
 }
 
 @layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  
   body {
     font-family: var(--font-sans);
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    @apply antialiased;
   }
 }

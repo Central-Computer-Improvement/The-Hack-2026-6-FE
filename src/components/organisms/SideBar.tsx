@@ -10,14 +10,7 @@ import {
   Settings, 
   HelpCircle 
 } from "lucide-react";
-import { useUIStore } from "@/store/useUIStore";
-// import { useAuthStore } from "@/store/useAuthStore"; 
 
-import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
-import { ProfileIdentity } from "@/components/molecules/ProfileIdentity";
-
-// --- KONFIGURASI MENU ---
 const MAIN_MENU = [
   { name: "Roadmap", href: "/roadmap", icon: Map },
   { name: "Study Buddy", href: "/study-buddy", icon: Bot },
@@ -25,81 +18,71 @@ const MAIN_MENU = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
 ];
 
-export default function Sidebar() {
+export default function SideBar() {
   const pathname = usePathname();
-  const { isMobileSidebarOpen, closeMobileSidebar } = useUIStore();
 
-  const renderSidebarContent = () => (
-    <div className="flex h-full flex-col bg-card border-r border-border text-foreground">
-      <div className="flex items-center justify-center pt-8 pb-6 px-6 border-b border-border">
-        <ProfileIdentity 
-          name="Professor Paw"
-          role="Your Learning Co-pilot"
-          avatarSrc="/assets/images/professor-paw.png" 
-          orientation="vertical"
-          size="lg"
-        />
+  return (
+    <aside className="hidden md:flex w-[260px] h-screen fixed inset-y-0 left-0 z-50 flex-col bg-[#E8EFF1] rounded-r-2xl shadow-[4px_0_24px_rgba(0,0,0,0.02)] border-r border-white/50">
+      
+      {/* HEADER: Profil Maskot */}
+      <div className="flex flex-col items-center gap-3 px-8 pt-10 pb-8">
+        <div className="h-12 w-12 shrink-0 overflow-hidden rounded-full bg-white shadow-sm border border-slate-200">
+          <img 
+            src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=200&auto=format&fit=crop" 
+            alt="Professor Paw" 
+            className="h-full w-full object-cover"
+          />
+        </div>
+        <div className="flex flex-col">
+          <span className="text-[17px] font-extrabold text-slate-900 tracking-tight leading-tight">
+            Professor Paw
+          </span>
+          <span className="text-[12px] font-medium text-slate-500">
+            Your Learning Co-pilot
+          </span>
+        </div>
       </div>
 
-      {/* RENDER LIST MENU */}
-      <div className="flex-1 overflow-y-auto py-6 px-4 space-y-1">
+      {/* MENU UTAMA */}
+      <div className="flex-1 flex flex-col gap-1 px-5">
         {MAIN_MENU.map((item) => {
-          const isActive = pathname === item.href;
+          // Asumsikan '/dashboard' aktif untuk preview ini
+          const isActive = item.name === "Dashboard" || pathname === item.href; 
+          
           return (
-            <Link key={item.name} href={item.href} onClick={closeMobileSidebar}>
+            <Link key={item.name} href={item.href}>
               <div
-                className={`flex items-center gap-3 px-3 py-3 rounded-btn transition-all duration-200 ${
+                className={`flex items-center gap-4 px-4 py-3.5 rounded-xl transition-all ${
                   isActive
-                    ? "bg-indigo-soft text-indigo-base font-bold"
-                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                    ? "text-indigo-base font-bold bg-white/60 shadow-[0_2px_10px_rgb(0,0,0,0.02)]"
+                    : "text-slate-500 font-semibold hover:text-slate-700 hover:bg-slate-200/50"
                 }`}
               >
-                <item.icon className={`w-5 h-5 ${isActive ? "text-indigo-base" : ""}`} />
-                <span className="text-body-medium">{item.name}</span>
+                <item.icon className={`w-[22px] h-[22px] ${isActive ? "text-indigo-base" : "text-slate-400"}`} strokeWidth={isActive ? 2.5 : 2} />
+                <span className="text-[15px]">{item.name}</span>
               </div>
             </Link>
           );
         })}
       </div>
 
-      {/* --- FOOTER SIDEBAR  --- */}
-      <div className="p-4 border-t border-border flex flex-col gap-2">
-        
-        {/* CTA */}
-        <Button 
-          className="w-full mb-2 h-14 bg-indigo-base hover:bg-indigo-700 text-white rounded-btn shadow-sm text-base font-bold"
-        >
+      {/* FOOTER: Tombol CTA & Pengaturan */}
+      <div className="px-6 pb-8 pt-4 flex flex-col gap-2">
+        <button className="mb-4 w-full bg-indigo-base text-white py-3.5 rounded-2xl font-bold text-[15px] shadow-md shadow-indigo-base/20 hover:bg-indigo-700 transition-colors">
           Start Quiz
-        </Button>
+        </button>
         
-        {/* Settings (Ghost) */}
-        <Button variant="ghost" className="w-full justify-start gap-3 text-muted-foreground hover:text-foreground hover:bg-muted">
-          <Settings className="w-5 h-5" />
-          <span className="text-body-medium">Settings</span>
-        </Button>
+        <button className="flex items-center gap-4 px-4 py-3 text-slate-500 font-semibold hover:text-slate-700 transition-colors">
+          <Settings className="w-[20px] h-[20px] text-slate-600" strokeWidth={2.5} />
+          <span className="text-[15px]">Settings</span>
+        </button>
         
-        {/* Help (Ghost) */}
-        <Button variant="ghost" className="w-full justify-start gap-3 text-muted-foreground hover:text-foreground hover:bg-muted">
-          <HelpCircle className="w-5 h-5" />
-          <span className="text-body-medium">Help</span>
-        </Button>
-        
+        <button className="flex items-center gap-4 px-4 py-3 text-slate-500 font-semibold hover:text-slate-700 transition-colors">
+          <HelpCircle className="w-[20px] h-[20px] text-slate-600" strokeWidth={2.5} />
+          <span className="text-[15px]">Help</span>
+        </button>
       </div>
-    </div>
-  );
-
-  return (
-    <>
-      <aside className="hidden md:flex w-64 h-screen fixed inset-y-0 left-0 z-50">
-        {renderSidebarContent()}
-      </aside>
-
-      <Sheet open={isMobileSidebarOpen} onOpenChange={(open) => !open && closeMobileSidebar()}>
-        <SheetContent side="left" className="p-0 w-72 border-none">
-          <SheetTitle className="sr-only">Navigasi Menu</SheetTitle>
-          {renderSidebarContent()}
-        </SheetContent>
-      </Sheet>
-    </>
+      
+    </aside>
   );
 }

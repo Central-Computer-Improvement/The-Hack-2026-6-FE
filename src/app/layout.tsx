@@ -1,10 +1,10 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Nunito_Sans } from "next/font/google";
+import { Nunito } from "next/font/google";
 
-const jakarta = Nunito_Sans({ 
+const nunito = Nunito({ 
   subsets: ["latin"],
-  variable: "--font-jakarta",
+  variable: "--font-nunito",
 });
 
 export const metadata: Metadata = {
@@ -18,8 +18,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={jakarta.variable}>
-      <body className="font-sans antialiased bg-slate-100 text-slate-900">
+    <html lang="en" className={nunito.variable}>
+      <body className="font-sans antialiased">
         {children}
       </body>
     </html>

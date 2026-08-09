@@ -1,5 +1,6 @@
-const APP_NAME = "AuraLearn";
 import Link from "next/link";
+const APP_NAME = "AuraLearn"
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Heading, Text } from "@/components/atoms/Typography";
@@ -28,7 +29,7 @@ export default function LoginPage() {
               />
             </div>
             
-            <Heading level={2} variant="headline-medium" className="mb-2 text-slate-900 font-bold tracking-tight">
+            <Heading level={3} variant="headline-medium" className="mb-2 text-slate-900 font-bold tracking-tight">
               Learn with friends!
             </Heading>
             <Text variant="muted" className="text-sm text-slate-500 font-medium">

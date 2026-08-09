@@ -1,55 +1,46 @@
 "use client";
-
-import { Menu, Flame, Coins } from "lucide-react";
-import { useUIStore } from "@/store/useUIStore";
-import { MOCK_PROFILE } from "@/constants/mockData";
-
-// Fallback APP_NAME (config file not a module in some environments)
 const APP_NAME = "AuraLearn";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { StatIndicator } from "@/components/atoms/StatsIndicator";
-import { IconButton } from "@/components/atoms/IconButton";
+import { Flame } from "lucide-react";
 
-export default function Navbar() {
-  const { openMobileSidebar } = useUIStore();
-
+export default function NavBar() {
   return (
-    <header className="sticky top-0 z-40 flex h-16 w-full items-center justify-between bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-4 md:px-8 transition-all">
+    <header className="sticky top-0 z-40 flex h-[90px] w-full items-center justify-between bg-[#F8F9FD]/80 backdrop-blur-md px-4 md:px-10">
       
-      <div className="flex items-center gap-3">
-        <div className="md:hidden">
-          <IconButton 
-            icon={Menu} 
-            variant="ghost" 
-            onClick={openMobileSidebar}
-            aria-label="Buka navigasi menu"
-          />
-        </div>
-        
-        {/* APP_NAME */}
-        <span className="font-sans text-xl font-extrabold tracking-tight text-primary md:text-2xl">
-          {APP_NAME}
-        </span>
+      {/* Area Kiri Kosong (Hanya Hamburger di Mobile) */}
+      <div className="flex items-center">
+        {/* Tombol Hamburger (Mobile Only) */}
+        <button className="md:hidden p-2 text-slate-600">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
       </div>
 
-      <div className="flex items-center gap-2 sm:gap-4">
-        <StatIndicator 
-          icon={Coins} 
-          value={MOCK_PROFILE.totalPoints.toLocaleString("id-ID")} 
-        />
-        <StatIndicator 
-          icon={Flame} 
-          value={`${MOCK_PROFILE.currentStreak} Days`} 
-          iconClassName="text-orange-500 fill-orange-500"
-        />
-        <div className="hidden h-6 w-px bg-border sm:block"></div>
-        <Avatar className="h-10 w-10 shrink-0 border-2 border-transparent cursor-pointer hover:border-indigo-base shadow-sm transition-all hover:scale-105">
-          <AvatarImage src={MOCK_PROFILE.avatar} alt={MOCK_PROFILE.name} className="object-cover" />
-          <AvatarFallback className="bg-indigo-base text-white font-bold">
-            {MOCK_PROFILE.name.charAt(0)}
-          </AvatarFallback>
-        </Avatar>
+      {/* Area Kanan: Status Bar (Points, Streak, Avatar) */}
+      <div className="flex items-center gap-4">
+        
+        {/* Indicator Poin (Knowledge Points) */}
+        <div className="flex items-center gap-2 rounded-full bg-white px-4 py-2 shadow-[0_2px_10px_rgb(0,0,0,0.03)]">
+          <div className="flex h-5 w-5 items-center justify-center rounded-full bg-amber-400 text-white text-[10px] font-black">
+            $
+          </div>
+          <span className="text-[14px] font-extrabold text-slate-700 tracking-tight">1,240</span>
+        </div>
+
+        {/* Indicator Streak */}
+        <div className="flex items-center gap-2 rounded-full bg-white px-4 py-2 shadow-[0_2px_10px_rgb(0,0,0,0.03)]">
+          <Flame className="h-5 w-5 fill-red-500 text-red-500" />
+          <span className="text-[14px] font-extrabold text-slate-700 tracking-tight">7</span>
+        </div>
+
+        {/* Avatar Profil */}
+        <div className="ml-2 h-10 w-10 cursor-pointer overflow-hidden rounded-full border-2 border-indigo-200 bg-white shadow-sm hover:border-indigo-base transition-colors">
+          <img 
+            src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=200&auto=format&fit=crop" 
+            alt="User Avatar" 
+            className="h-full w-full object-cover"
+          />
+        </div>
+
       </div>
     </header>
   );
