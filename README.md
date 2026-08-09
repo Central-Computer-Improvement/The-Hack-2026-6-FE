@@ -35,7 +35,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## Project tree
 
-
 ```
 ai-learning-platform
 ├─ components.json
@@ -56,6 +55,10 @@ ai-learning-platform
 ├─ README.md
 ├─ src
 │  ├─ app
+│  │  ├─ (dashboard)
+│  │  │  └─ layout.tsx
+│  │  ├─ Dashboard
+│  │  │  └─ page.tsx
 │  │  ├─ favicon.ico
 │  │  ├─ globals.css
 │  │  ├─ layout.tsx
@@ -68,9 +71,17 @@ ai-learning-platform
 │  │  │  ├─ StatsIndicator.tsx
 │  │  │  └─ Typography.tsx
 │  │  ├─ molecules
+│  │  │  ├─ ChatBubble.tsx
+│  │  │  ├─ ChatInput.tsx
+│  │  │  ├─ ProfileIdentity.tsx
+│  │  │  ├─ QuizOption.tsx
+│  │  │  ├─ RewardCard.tsx
+│  │  │  └─ SelectionCard.tsx
 │  │  ├─ organisms
+│  │  │  ├─ NavBar.tsx
 │  │  │  └─ SideBar.tsx
 │  │  ├─ templates
+│  │  │  └─ DashboardLayout.tsx
 │  │  └─ ui
 │  │     ├─ avatar.tsx
 │  │     ├─ badge.tsx

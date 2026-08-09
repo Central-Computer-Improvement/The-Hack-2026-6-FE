@@ -1,54 +1,17 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer base {
-  :root {
-    /* Background & Foreground */
-    --background: 228 50% 98%; /* #F8F9FD */
-    --foreground: 193 9% 19%; /* #2D3436 */
-
-    /* Cards */
-    --card: 0 0% 100%; /* #FFFFFF */
-    --card-foreground: 193 9% 19%; /* #2D3436 */
-
-    /* Popovers (Dropdown, Tooltips) */
-    --popover: 0 0% 100%;
-    --popover-foreground: 193 9% 19%;
-
-    /* Primary untuk Button & CTA) */
-    --primary: 247 69% 64%; /* #6C5CE7 */
-    --primary-foreground: 0 0% 100%; 
-
-    /* Secondary untuk Badge & Aksesoris */
-    --secondary: 29 100% 63%; /* #FF9F43 */
-    --secondary-foreground: 0 0% 100%;
-
-    /* Muted  */
-    --muted: 214 32% 91%; /* #E2E8F0 */
-    --muted-foreground: 215 16% 47%; /* #636E72 */
-
-    /* Accents (Untuk efek hover di Sidebar) */
-    --accent: 247 69% 96%; /* #F0EEFF */
-    --accent-foreground: 247 69% 64%; /* #6C5CE7 */
-
-    /* Sistem shadcn lainnya */
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214 32% 91%; /* #E2E8F0 */
-    --input: 214 32% 91%; /* #E2E8F0 */
-    --ring: 247 69% 64%; /* #6C5CE7 */
-    --radius: 1rem; 
-  }
+@theme {
+  --font-sans: var(--font-jakarta), system-ui, sans-serif;
+  
+  /* Warna Kustom Sesuai Desain UI/UX */
+  --color-indigo-base: #6366f1;
+  --color-indigo-hover: #4f46e5;
+  --color-indigo-soft: #e0e7ff;
+  --color-indigo-mid: #818cf8;
 }
 
 @layer base {
-  * {
-    border-color: hsl(var(--border));
-  }
   body {
-    background-color: hsl(var(--background));
-    color: hsl(var(--foreground));
-    @apply antialiased;
+    font-family: var(--font-sans);
   }
 }

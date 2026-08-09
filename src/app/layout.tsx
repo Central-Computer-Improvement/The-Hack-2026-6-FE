@@ -1,20 +1,25 @@
-import { Nunito_Sans } from "next/font/google";
 import "./globals.css";
+import type { Metadata } from "next";
+import { Nunito_Sans } from "next/font/google";
 
-const nunitoSans = Nunito_Sans({
+const jakarta = Nunito_Sans({ 
   subsets: ["latin"],
-  weight: ["400", "700", "800"], 
-  variable: "--font-nunito-sans", 
+  variable: "--font-jakarta",
 });
+
+export const metadata: Metadata = {
+  title: "AuraLearn",
+  description: "AI Learning Platform",
+};
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="id">
-      <body className={`${nunitoSans.variable} font-sans bg-background text-primary antialiased`}>
+    <html lang="en" className={jakarta.variable}>
+      <body className="font-sans antialiased bg-slate-100 text-slate-900">
         {children}
       </body>
     </html>
