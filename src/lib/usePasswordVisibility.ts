@@ -1,3 +1,4 @@
+// file : src/lib/usePasswordVisibility.ts
 import { useState } from "react";
 
 export function usePasswordVisibility(initialState: boolean = false) {

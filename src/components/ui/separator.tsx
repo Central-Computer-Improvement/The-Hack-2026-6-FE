@@ -1,5 +1,6 @@
 "use client"
 
+// file : src/components/ui/separator.tsx
 import * as React from "react"
 import { Separator as SeparatorPrimitive } from "radix-ui"
 

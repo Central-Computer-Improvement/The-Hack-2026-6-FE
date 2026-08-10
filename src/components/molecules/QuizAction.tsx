@@ -1,5 +1,6 @@
 "use client";
 
+// file : src/components/molecules/QuizOption.tsx
 import { Circle, CheckCircle2, XCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Text } from "@/components/atoms/Typography"; 

@@ -30,11 +30,11 @@ export interface HeadingProps
 
 export const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>(
   ({ className, variant, level = 2, ...props }, ref) => {
-    const Tag = `h${level}` as keyof JSX.IntrinsicElements;
+    const Tag = `h${level}` as React.ElementType;
     
     return (
       <Tag
-        ref={ref as React.Ref<any>} // Memaksa TS menerima dinamis ref
+        ref={ref as React.Ref<HTMLHeadingElement>} // Memaksa TS menerima dinamis ref
         className={cn(headingVariants({ variant, className }))}
         {...props}
       />
@@ -72,7 +72,7 @@ export const Text = React.forwardRef<HTMLElement, TextProps>(
   ({ className, variant, as: Tag = "p", ...props }, ref) => {
     return (
       <Tag
-        ref={ref as React.Ref<any>} 
+        ref={ref as React.Ref<HTMLElement>} 
         className={cn(textVariants({ variant, className }))}
         {...props}
       />

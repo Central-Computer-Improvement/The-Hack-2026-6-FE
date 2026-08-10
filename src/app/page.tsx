@@ -1,3 +1,4 @@
+// file : src/app/page.tsx
 "use client";
 
 import Link from "next/link";
@@ -70,7 +71,7 @@ export default function LoginPage() {
             </div>
 
             {/* Form */}
-            <form className="space-y-4" action="/dashboard">
+            <form className="space-y-4" action="/roleSelection">
               
               {/* Input Email */}
               <div className="space-y-1.5">
@@ -142,7 +143,7 @@ export default function LoginPage() {
 
             {/* Footer Pendaftaran */}
             <div className="text-center text-xs">
-              <Text variant="small">Don't have an account? </Text>
+              <Text variant="small">{`Don't have an account? `}</Text>
               <Link href="#" className="font-bold text-indigo-600 hover:underline">
                 Sign up now!
               </Link>

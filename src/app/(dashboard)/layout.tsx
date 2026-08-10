@@ -1,3 +1,5 @@
+
+// file : src/app/(dashboard)/layout.tsx
 import SideBar from "@/components/organisms/SideBar";
 import NavBar from "@/components/organisms/NavBar";
 

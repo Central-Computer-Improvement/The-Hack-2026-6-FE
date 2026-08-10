@@ -1,3 +1,5 @@
+// file : src/components/ui/button.tsx
+
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { Slot } from "@radix-ui/react-slot"
@@ -25,6 +27,7 @@ const buttonVariants = cva(
         sm: "h-10 rounded-btn px-4 text-xs",
         lg: "h-14 rounded-btn px-8",
         icon: "h-12 w-12",
+        "icon-sm": "h-8 w-8 rounded-md",
       },
     },
     defaultVariants: {

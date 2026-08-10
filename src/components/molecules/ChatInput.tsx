@@ -1,5 +1,6 @@
 "use client";
 
+// file : src/components/molecules/ChatInput.tsx
 import * as React from "react";
 import { Paperclip, Send } from "lucide-react";
 import { cn } from "@/lib/utils";

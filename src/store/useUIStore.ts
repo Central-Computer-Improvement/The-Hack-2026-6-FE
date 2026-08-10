@@ -1,3 +1,4 @@
+// file : src/store/useUIStore.ts
 import { create } from "zustand";
 
 interface UIState {

@@ -1,3 +1,4 @@
+// file : src/store/useAuthStore.ts
 import { create } from 'zustand';
 
 type Role = 'student' | 'admin' ;

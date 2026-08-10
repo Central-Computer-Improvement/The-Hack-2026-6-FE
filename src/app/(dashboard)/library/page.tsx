@@ -1,3 +1,5 @@
+//by Daniartha
+// File: src/app/(dashboard)/library/page.tsx
 "use client";
 
 import { useState } from "react";
@@ -89,8 +91,8 @@ export default function LibraryPage() {
                     return (
                       <QuizOption
                         key={optIndex}
-                        text={optionText}
-                        variant={isSelected ? "correct" : "default"}
+                        optionText={optionText}
+                        status={isSelected ? "correct" : "default"}
                         onClick={() => handleSelectOption(q.id, optIndex)}
                       />
                     );

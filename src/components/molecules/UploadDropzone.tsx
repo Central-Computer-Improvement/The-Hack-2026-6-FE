@@ -1,5 +1,6 @@
 "use client";
 
+// file : src/components/molecules/UploadDropzone.tsx
 import { FileUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Heading, Text } from "@/components/atoms/Typography"; 

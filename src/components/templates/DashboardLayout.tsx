@@ -1,3 +1,4 @@
+// file : src/components/templates/DashboardLayout.tsx
 import * as React from "react";
 import Sidebar from "@/components/organisms/SideBar"; 
 import Navbar from "@/components/organisms/NavBar";

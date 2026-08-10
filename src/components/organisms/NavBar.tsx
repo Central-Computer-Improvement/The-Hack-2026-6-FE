@@ -1,6 +1,7 @@
 "use client";
 const APP_NAME = "AuraLearn";
 
+// file : src/components/organisms/NavBar.tsx
 import { Flame } from "lucide-react";
 import { MOCK_PROFILE } from "@/constants/mockData";
 import {Heading, Text} from "@/components/atoms/Typography";

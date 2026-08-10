@@ -1,3 +1,4 @@
+// file : src/constants/mockData.ts
 /// TYPES & INTERFACES (Definisi Struktur Data)
 export type Role = "student" | "admin" ;
 export type NodeStatus = "locked" | "in-progress" | "completed";

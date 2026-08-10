@@ -1,3 +1,4 @@
+// file : src/components/atoms/Logo.tsx
 import * as React from "react";
 import { Bot } from "lucide-react";
 import { cn } from "@/lib/utils";

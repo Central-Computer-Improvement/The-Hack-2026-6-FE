@@ -1,5 +1,6 @@
 "use client";
 
+// file : src/components/organisms/SideBar.tsx
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { 

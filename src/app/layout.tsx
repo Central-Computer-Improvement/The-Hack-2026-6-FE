@@ -1,3 +1,5 @@
+
+// file : src/app/layout.tsx
 import "./globals.css";
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";

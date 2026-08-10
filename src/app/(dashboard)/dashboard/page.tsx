@@ -1,3 +1,5 @@
+//created by Daniartha
+// file : src/app/(dashboard)/dashboard/page.tsx
 import { 
   Flame, 
   Star, 
