@@ -3,21 +3,28 @@ const APP_NAME = "AuraLearn";
 
 import { Flame } from "lucide-react";
 import { MOCK_PROFILE } from "@/constants/mockData";
-import {Heading, Text} from "@/components/atoms/Typography";
+import { Heading, Text } from "@/components/atoms/Typography";
+import { motion } from "framer-motion";
+import { useNavbarScroll } from "@/lib/useNavbarScroll";
 
 export default function NavBar() {
   const initialLetter = MOCK_PROFILE.name.charAt(0).toUpperCase();
+  
+  // 3. Inisialisasi pergerakan Y. 
+  // Angka 100 memastikan seluruh elemen (termasuk margin atas) tersembunyi.
+  const y = useNavbarScroll(100);
 
   return (
-
-    <header className="sticky top-4 z-40 mx-4 mt-4 mb-4 flex h-[76px] items-center justify-between rounded-[24px] bg-white px-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] md:mx-8">
+    <motion.header 
+      style={{ y }}
+      className="sticky top-4 z-40 mx-4 mt-4 flex h-[76px] items-center justify-between rounded-[24px] bg-white px-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] md:mx-8"
+    >
       
       {/* =========================================
           AREA KIRI: Hamburger Menu & Logo Brand
           ========================================= */}
       <div className="flex items-center gap-3">
-        {/* Hamburger Menu (Hanya tampil di Mobile) */}
-        <button className="md:hidden rounded-full p-2 text-slate-500 hover:bg-slate-100 transition-colors">
+        <button className="rounded-full p-2 text-slate-500 transition-colors hover:bg-slate-100 md:hidden">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <line x1="3" y1="12" x2="21" y2="12"></line>
             <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -25,13 +32,14 @@ export default function NavBar() {
           </svg>
         </button>
         
-        {/* Teks Logo "AuraLearn" (Warna Indigo Utama) */}
-        <Heading level={1} className="font-extrabold tracking-tight text-indigo-dark md:block">
+        <span className="hidden text-[26px] font-extrabold tracking-tight text-indigo-dark md:block">
           {APP_NAME}
-        </Heading>
+        </span>
       </div>
 
-      {/* AREA KANAN: Indikator Gamifikasi & Avatar */}
+      {/* =========================================
+          AREA KANAN: Indikator Gamifikasi & Avatar
+          ========================================= */}
       <div className="flex items-center gap-3 md:gap-4">
         
         {/* Indikator Poin (Coins) */}
@@ -66,6 +74,6 @@ export default function NavBar() {
         </div>
 
       </div>
-    </header>
+    </motion.header>
   );
 }
