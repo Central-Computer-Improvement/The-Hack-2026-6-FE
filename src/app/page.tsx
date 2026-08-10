@@ -142,7 +142,7 @@ export default function LoginPage() {
 
             {/* Footer Pendaftaran */}
             <div className="text-center text-xs">
-              <Text variant="small">Don't have an account? </Text>
+              <Text variant="small">Dont have an account? </Text>
               <Link href="#" className="font-bold text-indigo-600 hover:underline">
                 Sign up now!
               </Link>
