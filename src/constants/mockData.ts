@@ -37,6 +37,21 @@ export interface RoadmapNode {
   pointsReward: number;
 }
 
+// Mock Library
+export interface QuizQuestion {
+  id: string;
+  question: string;
+  options: string[];
+  correctAnswerIndex: number; 
+}
+
+export interface QuizSession {
+  id: string;
+  title: string;
+  totalQuestions: number;
+  questions: QuizQuestion[];
+}
+
 
 /// MOCK DATA 
 // 1. data Profil & Dashboard
@@ -127,6 +142,7 @@ export const MOCK_CHAT_HISTORY: ChatMessage[] = [
   },
 ];
 
+
 // 3. data Roadmap AI
 export const MOCK_ROADMAP: RoadmapNode[] = [
   {
@@ -175,3 +191,34 @@ export const MOCK_ROADMAP: RoadmapNode[] = [
     pointsReward: 50,
   },
 ];
+
+// 4. DATA KUIS
+export const MOCK_MINI_QUIZ: QuizSession = {
+  id: "QUIZ-BIO-01",
+  title: "Active Mini Quiz",
+  totalQuestions: 2,
+  questions: [
+    {
+      id: "Q-001",
+      question: "What is the primary function of chloroplasts in plant cells?",
+      options: [
+        "Respiration",
+        "Photosynthesis",
+        "Water absorption",
+        "Energy storage"
+      ],
+      correctAnswerIndex: 1, 
+    },
+    {
+      id: "Q-002",
+      question: "Which gas do plants absorb from the atmosphere?",
+      options: [
+        "Oxygen",
+        "Carbon Dioxide",
+        "Nitrogen",
+        "Hydrogen"
+      ],
+      correctAnswerIndex: 1, 
+    },
+  ],
+};
