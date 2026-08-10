@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Bot } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Heading, Text } from "@/components/atoms/Typography";
+import { Heading } from "@/components/atoms/Typography";
 
 
 export interface LogoProps extends React.HTMLAttributes<HTMLDivElement> {

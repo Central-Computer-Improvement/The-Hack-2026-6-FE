@@ -3,6 +3,7 @@ const APP_NAME = "AuraLearn";
 
 import { Flame } from "lucide-react";
 import { MOCK_PROFILE } from "@/constants/mockData";
+import {Heading, Text} from "@/components/atoms/Typography";
 
 export default function NavBar() {
   const initialLetter = MOCK_PROFILE.name.charAt(0).toUpperCase();
@@ -25,14 +26,12 @@ export default function NavBar() {
         </button>
         
         {/* Teks Logo "AuraLearn" (Warna Indigo Utama) */}
-        <span className="hidden text-[26px] font-extrabold tracking-tight text-indigo-dark md:block">
+        <Heading level={1} className="font-extrabold tracking-tight text-indigo-dark md:block">
           {APP_NAME}
-        </span>
+        </Heading>
       </div>
 
-      {/* =========================================
-          AREA KANAN: Indikator Gamifikasi & Avatar
-          ========================================= */}
+      {/* AREA KANAN: Indikator Gamifikasi & Avatar */}
       <div className="flex items-center gap-3 md:gap-4">
         
         {/* Indikator Poin (Coins) */}

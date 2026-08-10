@@ -22,7 +22,7 @@ export default function SideBar() {
   const pathname = usePathname();
 
   return (
-    <aside className="hidden md:flex w-[260px] h-screen fixed inset-y-0 left-0 z-50 flex-col bg-[#E8EFF1] rounded-r-2xl shadow-[4px_0_24px_rgba(0,0,0,0.02)] border-r border-white/50">
+    <aside className="hidden md:flex w-[260px] h-screen fixed inset-y-0 left-0 z-50 flex-col bg-[#E8EFF1] rounded-r-4xl shadow-[4px_0_24px_rgba(0,0,0,0.02)] border-r border-white/50">
       
       {/* HEADER: Profil Maskot */}
       <div className="flex flex-col items-center gap-3 px-8 pt-10 pb-8">
@@ -46,7 +46,6 @@ export default function SideBar() {
       {/* MENU UTAMA */}
       <div className="flex-1 flex flex-col gap-1 px-5">
         {MAIN_MENU.map((item) => {
-          // Asumsikan '/dashboard' aktif untuk preview ini
           const isActive = item.name === "Dashboard" || pathname === item.href; 
           
           return (
