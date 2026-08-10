@@ -10,6 +10,8 @@ import {
   Settings, 
   HelpCircle 
 } from "lucide-react";
+import { Heading, Text } from "@/components/atoms/Typography";
+import Image from "next/image";
 
 const MAIN_MENU = [
   { name: "Roadmap", href: "/roadmap", icon: Map },
@@ -22,43 +24,62 @@ export default function SideBar() {
   const pathname = usePathname();
 
   return (
-    <aside className="hidden md:flex w-[260px] h-screen fixed inset-y-0 left-0 z-50 flex-col bg-[#E8EFF1] rounded-r-4xl shadow-[4px_0_24px_rgba(0,0,0,0.02)] border-r border-white/50">
+    <aside className="hidden md:flex w-[260px] h-screen fixed inset-y-0 left-0 z-50 flex-col bg-[#E8EFF1] rounded-r-[2rem] shadow-[4px_0_24px_rgba(0,0,0,0.03)] border-r border-white/60">
       
       {/* HEADER: Profil Maskot */}
       <div className="flex flex-col items-center gap-3 px-8 pt-10 pb-8">
-        <div className="h-12 w-12 shrink-0 overflow-hidden rounded-full bg-white shadow-sm border border-slate-200">
-          <img 
-            src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=200&auto=format&fit=crop" 
-            alt="Professor Paw" 
+        <div className="h-24 w-24 shrink-0 overflow-hidden rounded-full bg-white shadow-sm border border-slate-200">
+          <Image
+            src="/assets/images/prof-paw.webp" 
+                alt="Professor Paw" 
+                width={800}
+                height={800}
             className="h-full w-full object-cover"
           />
         </div>
-        <div className="flex flex-col">
-          <span className="text-[17px] font-extrabold text-slate-900 tracking-tight leading-tight">
+        <div className="flex flex-col text-center">
+          <Heading variant="headline-medium" className="leading-tight">
             Professor Paw
-          </span>
-          <span className="text-[12px] font-medium text-slate-500">
+          </Heading>
+          <Text variant="small" >
             Your Learning Co-pilot
-          </span>
+          </Text>
         </div>
       </div>
 
       {/* MENU UTAMA */}
-      <div className="flex-1 flex flex-col gap-1 px-5">
+      <div className="flex-1 flex flex-col gap-1.5 px-5">
         {MAIN_MENU.map((item) => {
-          const isActive = item.name === "Dashboard" || pathname === item.href; 
+          const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
           
           return (
             <Link key={item.name} href={item.href}>
               <div
-                className={`flex items-center gap-4 px-4 py-3.5 rounded-xl transition-all ${
+                className={`group flex items-center gap-4 px-5 py-3.5 transition-all duration-200 ${
                   isActive
-                    ? "text-indigo-base font-bold bg-white/60 shadow-[0_2px_10px_rgb(0,0,0,0.02)]"
-                    : "text-slate-500 font-semibold hover:text-slate-700 hover:bg-slate-200/50"
+                    ? "bg-[#CEC5FF] rounded-[40px] " 
+                    : "hover:bg-slate-200/60 rounded-[20px]" 
                 }`}
               >
-                <item.icon className={`w-[22px] h-[22px] ${isActive ? "text-indigo-base" : "text-slate-400"}`} strokeWidth={isActive ? 2.5 : 2} />
-                <span className="text-[15px]">{item.name}</span>
+                <item.icon 
+                  className={`w-[22px] h-[22px] transition-colors ${
+                    isActive 
+                      ? "text-indigo-dark" 
+                      : "text-slate-500 group-hover:text-slate-900"
+                  }`} 
+                  strokeWidth={2.5} 
+                />
+                
+                <Text 
+                  as="span" 
+                  className={`text-[16px] tracking-tight transition-colors ${
+                    isActive 
+                      ? "font-extrabold text-indigo-dark" 
+                      : "font-bold text-slate-600 group-hover:text-slate-900"
+                  }`}
+                >
+                  {item.name}
+                </Text>
               </div>
             </Link>
           );
@@ -67,18 +88,22 @@ export default function SideBar() {
 
       {/* FOOTER: Tombol CTA & Pengaturan */}
       <div className="px-6 pb-8 pt-4 flex flex-col gap-2">
-        <button className="mb-4 w-full bg-indigo-base text-white py-3.5 rounded-2xl font-bold text-[15px] shadow-md shadow-indigo-base/20 hover:bg-indigo-700 transition-colors">
+        <button className="mb-4 w-full bg-indigo-base text-white py-3.5 rounded-[16px] font-bold text-[15px] shadow-md shadow-indigo-base/20 hover:bg-indigo-700 transition-colors">
           Start Quiz
         </button>
         
-        <button className="flex items-center gap-4 px-4 py-3 text-slate-500 font-semibold hover:text-slate-700 transition-colors">
-          <Settings className="w-[20px] h-[20px] text-slate-600" strokeWidth={2.5} />
-          <span className="text-[15px]">Settings</span>
+        <button className="group flex items-center gap-4 px-5 py-3 transition-colors">
+          <Settings className="w-[22px] h-[22px] text-slate-500 transition-colors group-hover:text-slate-800" strokeWidth={2.5} />
+          <Text as="span" className="text-[15px] font-bold text-slate-500 transition-colors group-hover:text-slate-800">
+            Settings
+          </Text>
         </button>
         
-        <button className="flex items-center gap-4 px-4 py-3 text-slate-500 font-semibold hover:text-slate-700 transition-colors">
-          <HelpCircle className="w-[20px] h-[20px] text-slate-600" strokeWidth={2.5} />
-          <span className="text-[15px]">Help</span>
+        <button className="group flex items-center gap-4 px-5 py-3 transition-colors">
+          <HelpCircle className="w-[22px] h-[22px] text-slate-500 transition-colors group-hover:text-slate-800" strokeWidth={2.5} />
+          <Text as="span" className="text-[15px] font-bold text-slate-500 transition-colors group-hover:text-slate-800">
+            Help
+          </Text>
         </button>
       </div>
       

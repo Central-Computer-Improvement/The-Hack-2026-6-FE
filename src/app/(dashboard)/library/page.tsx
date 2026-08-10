@@ -9,16 +9,16 @@ import { QuizOption } from "@/components/molecules/QuizOption";
 import { MOCK_MINI_QUIZ } from "@/constants/mockData";
 
 export default function LibraryPage() {
-  // State buat nyimpen jawaban 
-  const [selectedAnswers, setSelectedAnswers] = useState<Record<string, number>>({});
+    // State buat nyimpen jawaban 
+    const [selectedAnswers, setSelectedAnswers] = useState<Record<string, number>>({});
 
-  // func button click
-  const handleSelectOption = (questionId: string, optionIndex: number) => {
-    setSelectedAnswers((prev) => ({
-      ...prev,
-      [questionId]: optionIndex,
-    }));
-  };
+    // func button click
+    const handleSelectOption = (questionId: string, optionIndex: number) => {
+        setSelectedAnswers((prev) => ({
+        ...prev,
+        [questionId]: optionIndex,
+        }));
+    };
 
   return (
     <div className="w-full max-w-[1200px] pb-24 font-sans">

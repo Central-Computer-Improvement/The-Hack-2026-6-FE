@@ -33,7 +33,7 @@ export default function DashboardPage() {
             Reward Room
           </Heading>
           <Text variant="muted">
-            Celebrate your achievements and see how far you've come!
+            Celebrate your achievements and see how far you have come!
           </Text>
         </div>
 
@@ -104,7 +104,7 @@ export default function DashboardPage() {
             Your Progress!
           </Heading>
           <Text variant="muted">
-            Keep up the great work, you're crushing it.
+            Keep up the great work, you are crushing it.
           </Text>
         </div>
 
@@ -180,7 +180,7 @@ export default function DashboardPage() {
         {/* Top Input Form Container */}
         <div className="mb-10 flex flex-col items-end gap-4 rounded-[24px] bg-white p-6 shadow-[0_4px_20px_rgb(0,0,0,0.03)] md:flex-row">
           <div className="w-full flex-1">
-            <Text variant="h4" className="font-bold mb-2">What do you need to do?</Text>
+            <Text variant="body-medium" className="font-bold mb-2">What do you need to do?</Text>
             <input 
               type="text" 
               placeholder="e.g. Science Project about Volcanoes" 
@@ -188,7 +188,7 @@ export default function DashboardPage() {
             />
           </div>
           <div className="w-full md:w-[220px]">
-            <Text variant="h4" className="font-bold mb-2">Deadline</Text>
+            <Text variant="body-medium" className="font-bold mb-2">Deadline</Text>
             <input 
               type="date" 
               className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-[14px] text-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-base" 
