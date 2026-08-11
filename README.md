@@ -108,9 +108,11 @@ ai-learning-platform
 │  ├─ constants
 │  │  └─ mockData.ts
 │  ├─ hooks
-│  ├─ lib
+│  │  ├─ useMediaQuery.ts
 │  │  ├─ useNavbarScroll.ts
-│  │  ├─ usePasswordVisibility.ts
+│  │  └─ usePasswordVisibility.ts
+│  ├─ lib
+│  │  ├─ formatter.ts
 │  │  └─ utils.ts
 │  ├─ store
 │  │  ├─ useAuthStore.ts
