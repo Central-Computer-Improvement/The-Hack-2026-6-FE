@@ -47,6 +47,7 @@ ai-learning-platform
 ├─ public
 │  ├─ assets
 │  │  └─ images
+│  │     └─ prof-paw.webp
 │  ├─ file.svg
 │  ├─ globe.svg
 │  ├─ next.svg
@@ -56,9 +57,11 @@ ai-learning-platform
 ├─ src
 │  ├─ app
 │  │  ├─ (dashboard)
-│  │  │  └─ layout.tsx
-│  │  ├─ Dashboard
-│  │  │  └─ page.tsx
+│  │  │  ├─ dashboard
+│  │  │  │  └─ page.tsx
+│  │  │  ├─ layout.tsx
+│  │  │  └─ library
+│  │  │     └─ page.tsx
 │  │  ├─ favicon.ico
 │  │  ├─ globals.css
 │  │  ├─ layout.tsx
@@ -74,14 +77,20 @@ ai-learning-platform
 │  │  │  ├─ ChatBubble.tsx
 │  │  │  ├─ ChatInput.tsx
 │  │  │  ├─ ProfileIdentity.tsx
+│  │  │  ├─ QuizAction.tsx
 │  │  │  ├─ QuizOption.tsx
 │  │  │  ├─ RewardCard.tsx
-│  │  │  └─ SelectionCard.tsx
+│  │  │  ├─ SelectionCard.tsx
+│  │  │  └─ UploadDropzone.tsx
 │  │  ├─ organisms
+│  │  │  ├─ ActiveMiniQuiz.tsx
+│  │  │  ├─ MaterialUploader.tsx
 │  │  │  ├─ NavBar.tsx
-│  │  │  └─ SideBar.tsx
+│  │  │  ├─ RewardRoom.tsx
+│  │  │  ├─ SideBar.tsx
+│  │  │  ├─ TaskSplitter.tsx
+│  │  │  └─ YourProgress.tsx
 │  │  ├─ templates
-│  │  │  └─ DashboardLayout.tsx
 │  │  └─ ui
 │  │     ├─ avatar.tsx
 │  │     ├─ badge.tsx
@@ -100,6 +109,8 @@ ai-learning-platform
 │  │  └─ mockData.ts
 │  ├─ hooks
 │  ├─ lib
+│  │  ├─ useNavbarScroll.ts
+│  │  ├─ usePasswordVisibility.ts
 │  │  └─ utils.ts
 │  ├─ store
 │  │  ├─ useAuthStore.ts
