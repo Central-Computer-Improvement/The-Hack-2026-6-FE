@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Heading, Text } from "@/components/atoms/Typography";
 import { Mail, Lock, EyeOff, Eye, Sparkles } from "lucide-react";
-import { usePasswordVisibility } from "@/lib/usePasswordVisibility";
+import { usePasswordVisibility } from "@/hooks/usePasswordVisibility";
 
 export default function LoginPage() {
   const { isVisible, toggleVisibility, inputType } = usePasswordVisibility();

@@ -5,7 +5,7 @@ import { Flame } from "lucide-react";
 import { MOCK_PROFILE } from "@/constants/mockData";
 import { Heading, Text } from "@/components/atoms/Typography";
 import { motion } from "framer-motion";
-import { useNavbarScroll } from "@/lib/useNavbarScroll";
+import { useNavbarScroll } from "@/hooks/useNavbarScroll";
 
 export default function NavBar() {
   const initialLetter = MOCK_PROFILE.name.charAt(0).toUpperCase();
