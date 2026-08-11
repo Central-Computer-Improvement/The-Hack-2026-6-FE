@@ -3,7 +3,6 @@ const APP_NAME = "AuraLearn";
 
 import { Flame } from "lucide-react";
 import { MOCK_PROFILE } from "@/constants/mockData";
-import { Heading, Text } from "@/components/atoms/Typography";
 import { motion } from "framer-motion";
 import { useNavbarScroll } from "@/hooks/useNavbarScroll";
 
