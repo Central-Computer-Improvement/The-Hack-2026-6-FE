@@ -1,3 +1,5 @@
+"use client";
+
 import { useMotionValue, useMotionValueEvent, useScroll } from "framer-motion";
 
 export function useNavbarScroll(navHeight: number = 80) {

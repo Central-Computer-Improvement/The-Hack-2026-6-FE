@@ -222,3 +222,7 @@ export const MOCK_MINI_QUIZ: QuizSession = {
     },
   ],
 };
+
+// pesan error file uploader
+export const UPLOAD_ERROR_MESSAGE = "File-nya tidak bisa terbaca nih, pastikan dokumenmu berisi teks ya!";
+export const UPLOAD_MAX_SIZE_MB = 15;
