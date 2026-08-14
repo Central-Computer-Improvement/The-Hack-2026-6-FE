@@ -1,3 +1,4 @@
+// file: src/components/atoms/framer/AnimatePresence.tsx
 "use client";
 
 import { AnimatePresence as FramerAnimatePresence } from "framer-motion";

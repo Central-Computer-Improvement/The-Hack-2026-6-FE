@@ -1,3 +1,4 @@
+// file: src/components/atoms/framer/FadeIn.tsx
 "use client";
 
 import React from 'react';

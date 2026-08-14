@@ -51,8 +51,8 @@ export default function ActiveMiniQuiz() {
                     return (
                       <QuizOption
                         key={optIndex}
-                        text={optionText}
-                        variant={isSelected ? "correct" : "default"}
+                        optionText={optionText}
+                        status={isSelected ? "correct" : "default"}
                         onClick={() => handleSelectOption(q.id, optIndex)}
                       />
                     );

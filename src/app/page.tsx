@@ -104,7 +104,7 @@ export default function AuthPage() {
                   </FadeIn>
 
                   <FadeIn key={isLogin ? "form-login" : "form-signup"} direction="up" duration={0.5} delay={0.1}>
-                    <form className="space-y-4" action="/dashboard/progress">
+                    <form className="space-y-4" action="/roleSelection" method="POST">
                       
                       {/* FORM SIGN UP */}
                       {!isLogin ? (

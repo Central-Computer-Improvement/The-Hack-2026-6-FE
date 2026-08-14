@@ -1,3 +1,4 @@
+// file: src/components/atoms/framer/motion.tsx
 "use client";
 
 import { motion } from 'framer-motion';
