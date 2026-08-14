@@ -8,7 +8,7 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
-  title: "AuraLearn",
+  title: "AuraLearn AI",
   description: "AI Learning Platform",
 };
 
