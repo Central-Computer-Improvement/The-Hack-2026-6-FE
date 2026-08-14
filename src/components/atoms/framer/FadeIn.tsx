@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { MotionDiv } from './Motion';
+import { MotionDiv } from './motion';
 import { FadeInProps } from '../../../types';
 
 
