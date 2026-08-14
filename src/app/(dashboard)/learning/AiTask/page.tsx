@@ -1,6 +1,6 @@
 import TaskSplitter from "@/components/organisms/TaskSplitter";
 
-export default function DashboardPage() {
+export default function AiTaskPage() {
   return (
     <div className="w-full w-full pb-24">
       {/* SECTION 1: TASK SPLITTER */}

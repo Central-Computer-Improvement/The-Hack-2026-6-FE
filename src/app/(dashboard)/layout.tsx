@@ -16,7 +16,7 @@ export default function DashboardLayout({
       <div className="flex w-full flex-1 flex-col transition-all duration-300 md:pl-[260px]">       
         <NavBar />
         <main className="flex-1">
-          <div className="mx-auto max-w-[1200px] p-4 md:p-8">
+          <div className="mx-auto max-w-[1200px] p-4 md:px-8">
             {children}
           </div>
         </main>

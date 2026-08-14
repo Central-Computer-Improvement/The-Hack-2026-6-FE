@@ -40,6 +40,11 @@ const MAIN_MENU = [
   },
 ];
 
+const FOOTER_MENU = [
+  { name: "Settings", href: "/settings", icon: Settings },
+  { name: "Help", href: "/help", icon: HelpCircle },
+];
+
 export default function SideBar() {
   const pathname = usePathname();
 
@@ -160,8 +165,8 @@ export default function SideBar() {
                   <item.icon 
                     className={`h-[22px] w-[22px] transition-colors ${
                       isMenuOpen 
-                        ? "text-indigo-dark" 
-                        : "text-slate-600 group-hover:text-slate-900"
+                        ? "font-extrabold text-indigo-dark" 
+                        : "font-bold text-slate-600 group-hover:text-slate-900"
                     }`} 
                     strokeWidth={2.5} 
                   />
@@ -170,7 +175,7 @@ export default function SideBar() {
                     className={`text-[16px] tracking-tight transition-colors ${
                       isMenuOpen 
                         ? "font-extrabold text-indigo-dark" 
-                        : "font-bold text-slate-700 group-hover:text-slate-900"
+                        : "font-bold text-slate-600 group-hover:text-slate-900"
                     }`}
                   >
                     {item.name}
@@ -202,16 +207,16 @@ export default function SideBar() {
                           <div
                             className={`px-12 py-3 transition-colors border-b border-slate-200 last:border-b-0 ${
                             isChildActive 
-                              ? "bg-[#CEC5FF]" 
-                              : "bg-white hover:bg-slate-50"
+                              ? "bg-[#CEC5FF] hover:bg-[#C2B6FF]" 
+                              : "hover:bg-slate-200/60"
                             }`}
                           >
                             <Text 
                               as="span" 
                               className={`text-[14px] ${
                                 isChildActive
-                                  ? "font-bold text-slate-900"
-                                  : "font-medium text-slate-700"
+                                ? "font-extrabold text-indigo-dark" 
+                                : "font-bold text-slate-600 group-hover:text-slate-900"
                               }`}
                             >
                               {child.name}
@@ -229,24 +234,48 @@ export default function SideBar() {
       </div>
 
       {/* FOOTER: Tombol CTA & Pengaturan */}
-      <div className="px-6 pb-8 pt-4 flex flex-col gap-2 shrink-0">
-        <button className="mb-4 w-full bg-indigo-base text-white py-3.5 rounded-[16px] font-bold text-[15px] shadow-md shadow-indigo-base/20 hover:bg-indigo-700 transition-colors">
+      {/* FOOTER: Tombol Quiz + Menu Bawah (Settings & Help) */}
+      <div className="px-5 pb-8 pt-4 flex flex-col gap-2 shrink-0">
+        
+        {/* Tombol Start Quiz */}
+        <button className="mb-2 w-full bg-[#5D44D8] text-white py-3.5 rounded-[16px] font-bold text-[15px] shadow-md shadow-[#5D44D8]/20 hover:bg-indigo-700 transition-colors active:scale-[0.98]">
           Start Quiz
         </button>
-        
-        <button className="group flex items-center gap-4 px-5 py-3 transition-colors">
-          <Settings className="w-[22px] h-[22px] text-slate-600 transition-colors group-hover:text-slate-900" strokeWidth={2.5} />
-          <Text as="span" className="text-[15px] font-bold text-slate-600 transition-colors group-hover:text-slate-900">
-            Settings
-          </Text>
-        </button>
-        
-        <button className="group flex items-center gap-4 px-5 py-3 transition-colors">
-          <HelpCircle className="w-[22px] h-[22px] text-slate-600 transition-colors group-hover:text-slate-900" strokeWidth={2.5} />
-          <Text as="span" className="text-[15px] font-bold text-slate-600 transition-colors group-hover:text-slate-900">
-            Help
-          </Text>
-        </button>
+
+        {/* Pemetaan Menu Footer (Settings & Help) */}
+        {FOOTER_MENU.map((item) => {
+          const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
+          return (
+            <Link key={item.name} href={item.href}>
+              <div
+                className={`group flex w-full cursor-pointer items-center gap-4 px-5 py-3.5 transition-all duration-200 active:scale-[0.98] ${
+                  isActive
+                    ? "rounded-[40px] bg-[#CEC5FF] hover:bg-[#C2B6FF]" 
+                    : "rounded-[20px] hover:bg-slate-200/60"
+                }`}
+              >
+                <item.icon 
+                  className={`h-[22px] w-[22px] transition-colors ${
+                    isActive 
+                      ? "text-white" 
+                      : "text-slate-500 group-hover:text-slate-900"
+                  }`} 
+                  strokeWidth={2.5} 
+                />
+                <Text 
+                  as="span" 
+                  className={`text-[16px] tracking-tight transition-colors ${
+                    isActive 
+                      ? "font-extrabold text-white" 
+                      : "font-bold text-slate-600 group-hover:text-slate-900"
+                  }`}
+                >
+                  {item.name}
+                </Text>
+              </div>
+            </Link>
+          );
+        })}
       </div>
       
     </aside>
