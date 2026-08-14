@@ -15,6 +15,8 @@ import {
 } from "lucide-react";
 import { Heading, Text } from "@/components/atoms/Typography";
 import Image from "next/image";
+import AnimatePresence from "@/components/atoms/framer/AnimatePresence";
+import { MotionDiv } from "@/components/atoms/framer/motion";
 
 const MAIN_MENU = [
   { name: "Roadmap", href: "/roadmap", icon: Map },
@@ -32,7 +34,7 @@ const MAIN_MENU = [
     name: "Dashboard", 
     icon: LayoutDashboard,
     children: [
-      { name: "Progress", href: "/dashboard" },
+      { name: "Progress", href: "/dashboard/progress" },
       { name: "Achievements & Rewards", href: "/dashboard/rewards" }, 
     ]
   },
@@ -41,39 +43,41 @@ const MAIN_MENU = [
 export default function SideBar() {
   const pathname = usePathname();
 
-  const [openMenus, setOpenMenus] = useState<Record<string, boolean>>({
-    "Learning": false,
-    "Dashboard": true 
-  });
+  // STATE ACCORDION
+  const [openMenu, setOpenMenu] = useState<string | null>("Dashboard");
 
-  // toggle buka/tutup menu
+  // LOGIKA TOGGLE
   const toggleMenu = (menuName: string) => {
-    setOpenMenus((prev) => ({
-      ...prev,
-      [menuName]: !prev[menuName]
-    }));
+    setOpenMenu((prev) => (prev === menuName ? null : menuName));
   };
 
-  // Effect untuk membuka menu jika aktif 
+  // EFFECT
   useEffect(() => {
+    let isChildActiveFound = false;
+    
     MAIN_MENU.forEach((menu) => {
       if (menu.children) {
+        // EXACT MATCH (===) agar tidak bentrok
         const isAnyChildActive = menu.children.some(
-          (child) => pathname === child.href || pathname.startsWith(`${child.href}/`)
+          (child) => pathname === child.href
         );
         if (isAnyChildActive) {
-          setOpenMenus((prev) => ({ ...prev, [menu.name]: true }));
+          setOpenMenu(menu.name);
+          isChildActiveFound = true;
         }
       }
     });
+
+    // Mencegah duplikasi aktif
+    if (!isChildActiveFound) {
+      setOpenMenu(null);
+    }
   }, [pathname]);
   return (
-    <aside 
-      className="hidden md:flex w-[260px] min-w-[260px] shrink-0 h-screen fixed inset-y-0 left-0 z-50 flex-col  
-      bg-[#E8EFF1] rounded-r-[2rem] shadow-[4px_0_24px_rgba(0,0,0,0.03)] border-r border-white/60">
+    <aside className="hidden md:flex w-[260px] min-w-[260px] shrink-0 h-screen fixed inset-y-0 left-0 z-50 flex-col overflow-y-auto overflow-x-hidden bg-[#E8EFF1] rounded-r-[2rem] shadow-[4px_0_24px_rgba(0,0,0,0.03)] border-r border-white/60 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
       
       {/* HEADER: Profil Maskot */}
-      <div className="flex flex-col items-center gap-3 px-8 pt-10 pb-4 shrink-0">
+      <div className="flex flex-col items-center gap-3 px-8 pt-10 pb-8 shrink-0">
         <div className="h-24 w-24 shrink-0 overflow-hidden rounded-full bg-white shadow-sm border border-slate-200">
           <Image
             src="/assets/images/prof-paw.webp" 
@@ -96,20 +100,23 @@ export default function SideBar() {
       {/* MENU UTAMA */}
       <div className="flex-1 flex flex-col gap-2 px-5 py-2 overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
         {MAIN_MENU.map((item) => {
-          // Cek apakah item ini tidak memiliki dropdown (Single Link)
+          
+          // ==========================================
+          // RENDER SINGLE LINK (Roadmap & Library)
+          // ==========================================
           if (!item.children) {
             const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
             return (
               <Link key={item.name} href={item.href!}>
                 <div
-                  className={`group flex items-center gap-4 px-5 py-3.5 transition-all duration-200 ${
+                  className={`group flex w-full cursor-pointer items-center gap-4 px-5 py-3.5 transition-all duration-200 active:scale-[0.98] ${
                     isActive
-                      ? "bg-[#CEC5FF] rounded-[40px]" 
-                      : "hover:bg-slate-200/60 rounded-[20px]" 
+                      ? "rounded-[40px] bg-[#CEC5FF] hover:bg-[#C2B6FF]" 
+                      : "rounded-[20px] hover:bg-slate-200/60" 
                   }`}
                 >
                   <item.icon 
-                    className={`w-[22px] h-[22px] transition-colors ${
+                    className={`h-[22px] w-[22px] transition-colors ${
                       isActive 
                         ? "text-indigo-dark" 
                         : "text-slate-500 group-hover:text-slate-900"
@@ -131,24 +138,29 @@ export default function SideBar() {
             );
           }
 
-          // Cek dropdown (Parent Menu)
-          const isMenuOpen = openMenus[item.name];
-          const isAnyChildActive = item.children.some(
-            (child) => pathname === child.href
-          );
+          // ==========================================
+          // RENDER PARENT TOGGLE (Learning & Dashboard)
+          // ==========================================
+          const isMenuOpen = openMenu === item.name;
 
           return (
             <div key={item.name} className="flex flex-col">
-              {/* Parent Toggle Button */}
+              
+              {/* Tombol Parent Toggle */}
               <button
                 onClick={() => toggleMenu(item.name)}
-                className="group flex items-center justify-between w-full px-5 py-3.5 transition-all duration-200 hover:bg-slate-200/60 rounded-[20px]"
+                // Hanya gunakan isMenuOpen sebagai indikator aktif Parent Toggle
+                className={`group flex w-full cursor-pointer items-center justify-between px-5 py-3.5 transition-all duration-200 active:scale-[0.98] ${
+                  isMenuOpen
+                    ? "rounded-[40px] bg-[#CEC5FF] hover:bg-[#C2B6FF]" 
+                    : "rounded-[20px] hover:bg-slate-200/60"
+                }`}
               >
                 <div className="flex items-center gap-4">
                   <item.icon 
-                    className={`w-[22px] h-[22px] transition-colors ${
-                      isAnyChildActive 
-                        ? "text-indigo-base" 
+                    className={`h-[22px] w-[22px] transition-colors ${
+                      isMenuOpen 
+                        ? "text-indigo-dark" 
                         : "text-slate-600 group-hover:text-slate-900"
                     }`} 
                     strokeWidth={2.5} 
@@ -156,61 +168,69 @@ export default function SideBar() {
                   <Text 
                     as="span" 
                     className={`text-[16px] tracking-tight transition-colors ${
-                      isAnyChildActive 
-                        ? "font-extrabold text-indigo-base" 
+                      isMenuOpen 
+                        ? "font-extrabold text-indigo-dark" 
                         : "font-bold text-slate-700 group-hover:text-slate-900"
                     }`}
                   >
                     {item.name}
                   </Text>
                 </div>
-                {/* Ikon Chevron (Panah) */}
+                
+                {/* Ikon Chevron (Menghadap atas bila buka, bawah bila tutup) */}
                 {isMenuOpen ? (
-                  <ChevronUp className="w-5 h-5 text-slate-400" />
+                  <ChevronUp className="h-5 w-5 text-indigo-dark transition-colors" />
                 ) : (
-                  <ChevronDown className="w-5 h-5 text-slate-400" />
+                  <ChevronDown className="h-5 w-5 text-slate-400 transition-colors group-hover:text-slate-600" />
                 )}
               </button>
 
-              {/* Sub-menu Items (Dropdown Box Putih) */}
-              {isMenuOpen && (
-                <div className="flex flex-col mt-1 mb-2 bg-white rounded-md overflow-hidden  shadow-[0_2px_10px_rgb(0,0,0,0.02)]">
-                  {item.children.map((child, index) => {
-                    const isChildActive = pathname === child.href;
-                    
-                    return (
-                      <Link key={child.name} href={child.href}>
-                        <div
-                          className={`px-12 py-3 transition-colors border-b border-slate-200 last:border-b-0 ${
-                          isChildActive 
-                            ? "bg-[#CEC5FF]" 
-                            : "bg-white hover:bg-slate-50"
-                          }`}
-                        >
-                          <Text 
-                            as="span" 
-                            className={`text-[14px] ${
-                              isChildActive
-                                ? "font-bold text-slate-900"
-                                : "font-medium text-slate-700"
+              {/* Sub-menu Items dengan Animasi Framer Motion */}
+              <AnimatePresence>
+                {isMenuOpen && (
+                  <MotionDiv 
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    className="flex flex-col mt-1 mb-2 bg-white rounded-md overflow-hidden shadow-[0_2px_10px_rgb(0,0,0,0.02)]"
+                  >
+                    {item.children.map((child, index) => {
+                      const isChildActive = pathname === child.href;
+                      
+                      return (
+                        <Link key={child.name} href={child.href}>
+                          <div
+                            className={`px-12 py-3 transition-colors border-b border-slate-200 last:border-b-0 ${
+                            isChildActive 
+                              ? "bg-[#CEC5FF]" 
+                              : "bg-white hover:bg-slate-50"
                             }`}
                           >
-                            {child.name}
-                          </Text>
-                        </div>
-                      </Link>
-                    );
-                  })}
-                </div>
-              )}
+                            <Text 
+                              as="span" 
+                              className={`text-[14px] ${
+                                isChildActive
+                                  ? "font-bold text-slate-900"
+                                  : "font-medium text-slate-700"
+                              }`}
+                            >
+                              {child.name}
+                            </Text>
+                          </div>
+                        </Link>
+                      );
+                    })}
+                  </MotionDiv>
+                )}
+              </AnimatePresence>
             </div>
           );
         })}
       </div>
 
       {/* FOOTER: Tombol CTA & Pengaturan */}
-      <div className="px-6 pb-4 pt-4 flex flex-col gap-2 shrink-0">
-        <button className="w-full bg-indigo-base text-white py-3.5 rounded-[16px] font-bold text-[15px] shadow-md shadow-indigo-base/20 hover:bg-indigo-700 transition-colors">
+      <div className="px-6 pb-8 pt-4 flex flex-col gap-2 shrink-0">
+        <button className="mb-4 w-full bg-indigo-base text-white py-3.5 rounded-[16px] font-bold text-[15px] shadow-md shadow-indigo-base/20 hover:bg-indigo-700 transition-colors">
           Start Quiz
         </button>
         

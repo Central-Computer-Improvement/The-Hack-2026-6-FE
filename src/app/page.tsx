@@ -70,7 +70,7 @@ export default function LoginPage() {
             </div>
 
             {/* Form */}
-            <form className="space-y-4" action="/dashboard">
+            <form className="space-y-4" action="/dashboard/progress">
               
               {/* Input Email */}
               <div className="space-y-1.5">

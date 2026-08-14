@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 // FRAMER COMPONENTS
 export interface FadeInProps {
     children: React.ReactNode;
@@ -30,4 +32,11 @@ export interface TextRevealProps {
     children: React.ReactNode;
     delay?: number;
     className?: string;
+}
+
+export interface AnimatePresenceProps {
+  children: ReactNode;
+  mode?: "sync" | "wait" | "popLayout";
+  initial?: boolean;
+  onExitComplete?: () => void;
 }

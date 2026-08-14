@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { MOCK_PROFILE } from "@/constants/mockData";
 import { Heading, Text } from "@/components/atoms/Typography";
+import FadeIn from "../atoms/framer/FadeIn";
 
 export default function RewardRoom() {
   const getIconForSubject = (subjectName: string, isMastered: boolean) => {
@@ -19,8 +20,8 @@ export default function RewardRoom() {
   };
 
   return (
-      <div>
-        <div className="mb-8">
+      <FadeIn direction="up">
+        <div className="mt-2 mb-4">
           <Heading level={1} variant="headline-large">
             Reward Room
           </Heading>
@@ -86,6 +87,6 @@ export default function RewardRoom() {
             })}
           </div>
         </div>
-      </div>
+      </FadeIn>
   );
 }

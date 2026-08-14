@@ -7,9 +7,6 @@ export default function DashboardPage() {
     <div className="w-full w-full pb-24">
       {/* SECTION 1: Your Progress*/}
       <YourProgress/>
-
-      {/* SECTION 3: TASK SPLITTER */}
-      <TaskSplitter/>
     </div>
   );
 }

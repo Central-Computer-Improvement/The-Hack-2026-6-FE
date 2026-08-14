@@ -3,11 +3,12 @@ import {
   TrendingUp
 } from "lucide-react";
 import { Heading, Text } from "@/components/atoms/Typography";
+import FadeIn from "../atoms/framer/FadeIn";
 
 export default function YourProgress() {
   return (
-      <div className="mt-16">
-        <div className="mb-8">
+      <FadeIn direction="up">
+        <div className="mt-2 mb-4">
           <Heading level={2} variant="headline-large">
             Your Progress!
           </Heading>
@@ -72,6 +73,6 @@ export default function YourProgress() {
             </div>
           </div>
         </div>
-      </div>
+      </FadeIn>
   );
 }
