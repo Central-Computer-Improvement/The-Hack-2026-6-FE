@@ -24,7 +24,7 @@ const MAIN_MENU = [
     name: "Learning", 
     icon: Bot,
     children: [
-      { name: "Video Lessons", href: "/learning/video-lessons" },
+      { name: "Video Lessons", href: "/learning/videoLearning" },
       { name: "Study Buddy", href: "/learning/study-budy" },
       { name: "AI Task", href: "/learning/AiTask" },
     ]
