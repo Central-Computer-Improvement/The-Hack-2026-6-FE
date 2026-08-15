@@ -42,7 +42,7 @@ const MAIN_MENU = [
 
 const FOOTER_MENU = [
   { name: "Settings", href: "/settings", icon: Settings },
-  { name: "Help", href: "/help", icon: HelpCircle },
+  { name: "Help", href: "/helpCenter", icon: HelpCircle },
 ];
 
 export default function SideBar() {
@@ -63,7 +63,8 @@ export default function SideBar() {
 
     MAIN_MENU.forEach((menu) => {
       if (menu.children) {
-        // EXACT MATCH (===) agar tidak bentrok
+
+
         const isAnyChildActive = menu.children.some(
           (child) => pathname === child.href
         );
