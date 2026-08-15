@@ -30,17 +30,23 @@ export interface HeadingProps
 
 export const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>(
   ({ className, variant, level = 2, ...props }, ref) => {
-    // Tetap pakai keyof JSX.IntrinsicElements untuk validasi nilai Tag
-    const Tag = `h${level}` as keyof React.JSX.IntrinsicElements;
-    
-    const Component = Tag as React.ElementType;
+    // Validasi nilai Tag tetap dibatasi ke h1-h6
+    const Tag = `h${level}` as "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
-    return (
-      <Component
-        ref={ref}
-        className={cn(headingVariants({ variant, className }))}
-        {...props}
-      />
+    // Pakai React.createElement, BUKAN <Component /> di JSX.
+    // Kalau sebuah variabel bertipe ElementType dipakai langsung sebagai
+    // tag JSX (<Component />), TypeScript mencoba resolve
+    // JSX.LibraryManagedAttributes untuk SEMUA kemungkinan elemen
+    // (termasuk elemen SVG seperti <symbol>), yang memicu error
+    // "onCopy incompatible" (TS2322) dan "union type too complex" (TS2590).
+    // React.createElement menghindari resolusi union tersebut.
+    return React.createElement(
+      Tag,
+      {
+        ref,
+        className: cn(headingVariants({ variant, className })),
+        ...props,
+      }
     );
   }
 );
@@ -73,14 +79,16 @@ export interface TextProps
 
 export const Text = React.forwardRef<HTMLElement, TextProps>(
   ({ className, variant, as: Tag = "p", ...props }, ref) => {
-    const Component = Tag as React.ElementType;
-
-    return (
-      <Component
-        ref={ref}
-        className={cn(textVariants({ variant, className }))}
-        {...props}
-      />
+    // Sama seperti Heading: pakai createElement, bukan <Component /> di JSX,
+    // supaya TypeScript tidak mencoba resolve union props dari semua
+    // kemungkinan elemen JSX (HTML + SVG).
+    return React.createElement(
+      Tag,
+      {
+        ref,
+        className: cn(textVariants({ variant, className })),
+        ...props,
+      }
     );
   }
 );
