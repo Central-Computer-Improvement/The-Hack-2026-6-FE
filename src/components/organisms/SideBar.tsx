@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { 
@@ -25,7 +25,7 @@ const MAIN_MENU = [
     icon: Bot,
     children: [
       { name: "Video Lessons", href: "/learning/video-lessons" },
-      { name: "Study Buddy", href: "/learning/study-buddy" },
+      { name: "Study Buddy", href: "/learning/study-budy" },
       { name: "AI Task", href: "/learning/AiTask" },
     ]
   },
@@ -51,15 +51,16 @@ export default function SideBar() {
   // STATE ACCORDION
   const [openMenu, setOpenMenu] = useState<string | null>("Dashboard");
 
-  // LOGIKA TOGGLE
-  const toggleMenu = (menuName: string) => {
-    setOpenMenu((prev) => (prev === menuName ? null : menuName));
-  };
+  // Lacak pathname sebelumnya, dipakai untuk sinkronisasi openMenu SAAT RENDER
+  // (bukan di useEffect) agar tidak memicu cascading render / error eslint
+  // react-hooks/set-state-in-effect
+  const [prevPathname, setPrevPathname] = useState(pathname);
 
-  // EFFECT
-  useEffect(() => {
-    let isChildActiveFound = false;
-    
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
+
+    let matchedMenu: string | null = null;
+
     MAIN_MENU.forEach((menu) => {
       if (menu.children) {
         // EXACT MATCH (===) agar tidak bentrok
@@ -67,17 +68,21 @@ export default function SideBar() {
           (child) => pathname === child.href
         );
         if (isAnyChildActive) {
-          setOpenMenu(menu.name);
-          isChildActiveFound = true;
+          matchedMenu = menu.name;
         }
       }
     });
 
-    // Mencegah duplikasi aktif
-    if (!isChildActiveFound) {
-      setOpenMenu(null);
-    }
-  }, [pathname]);
+    // Jika tidak ada child yang aktif, matchedMenu tetap null
+    // (otomatis menutup accordion, menggantikan logic isChildActiveFound sebelumnya)
+    setOpenMenu(matchedMenu);
+  }
+
+  // LOGIKA TOGGLE
+  const toggleMenu = (menuName: string) => {
+    setOpenMenu((prev) => (prev === menuName ? null : menuName));
+  };
+
   return (
     <aside className="hidden md:flex w-[260px] min-w-[260px] shrink-0 h-screen fixed inset-y-0 left-0 z-50 flex-col overflow-y-auto overflow-x-hidden bg-[#E8EFF1] rounded-r-[2rem] shadow-[4px_0_24px_rgba(0,0,0,0.03)] border-r border-white/60 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
       

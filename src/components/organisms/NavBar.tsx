@@ -20,7 +20,7 @@ import { MOCK_PROFILE } from "@/constants/mockData";
 import { AnimatePresence } from "framer-motion";
 import { useNavbarScroll } from "@/hooks/useNavbarScroll";
 import { Text } from "@/components/atoms/Typography";
-import { MotionDrawer, MotionHeader, MotionBackdrop, MotionDiv } from "../atoms/framer/motion";
+import { MotionDrawer, MotionHeader, MotionBackdrop, MotionDiv } from "@/components/atoms/framer/motion";
 
 const MAIN_MENU = [
   { name: "Roadmap", href: "/roadmap", icon: Map },
@@ -29,7 +29,7 @@ const MAIN_MENU = [
     icon: Bot,
     children: [
       { name: "Video Lessons", href: "/learning/video-lessons" },
-      { name: "Study Buddy", href: "/learning/study-buddy" },
+      { name: "Study Buddy", href: "/learning/study-budy" },
       { name: "AI Task", href: "/learning/AiTask" },
     ]
   },
@@ -63,9 +63,11 @@ export default function NavBar() {
   };
 
   // Efek untuk menutup menu saat halaman berpindah
-  useEffect(() => {
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
     setIsMobileMenuOpen(false);
-  }, [pathname]);
+  }
 
   // Efek untuk mengunci scroll body saat menu terbuka
   useEffect(() => {

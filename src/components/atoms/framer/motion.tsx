@@ -13,6 +13,8 @@ export const MotionHeader = motion.header;
 
 interface BackdropProps {
   onClick: () => void;
+  className?: string;
+  children?: React.ReactNode;
 }
 
 export const MotionBackdrop = ({ onClick }: BackdropProps) => (
