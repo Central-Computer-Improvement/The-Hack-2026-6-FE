@@ -172,9 +172,12 @@ export default function NavBar() {
                 
               {/* FOOTER */}
               <div className="px-5 pb-8 pt-4 flex flex-col gap-2 shrink-0 mt-auto border-t border-white/60">
-                <button className="mb-2 w-full bg-[#5D44D8] text-white py-3.5 rounded-[16px] font-bold text-[15px] shadow-md shadow-[#5D44D8]/20 hover:bg-indigo-700 transition-colors active:scale-[0.98]">
-                  Start Quiz
-                </button>
+                <Link href="/start-quiz" className="w-full">
+                  <button className="mb-2 w-full bg-[#5D44D8] text-white py-3.5 rounded-[16px] font-bold text-[15px] shadow-md shadow-[#5D44D8]/20 hover:bg-indigo-700 transition-colors active:scale-[0.98]">
+                    Start Quiz
+                  </button>
+                </Link>
+                
                 {FOOTER_MENU.map((item) => {
                   const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
                   return (
