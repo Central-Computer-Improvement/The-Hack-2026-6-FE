@@ -12,7 +12,6 @@ export default function StartQuizPage() {
 
   const handleStart = () => {
     setIsStarting(true);
-    // TODO: ganti dengan route halaman soal quiz saat sudah dibuat
     router.push("/start-quiz/session");
   };
 

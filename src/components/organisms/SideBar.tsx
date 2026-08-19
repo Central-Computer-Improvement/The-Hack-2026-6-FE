@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { 
@@ -11,12 +11,15 @@ import {
   Settings, 
   HelpCircle,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
+  Brain,
+  Layers,
 } from "lucide-react";
 import { Heading, Text } from "@/components/atoms/Typography";
 import Image from "next/image";
 import AnimatePresence from "@/components/atoms/framer/AnimatePresence";
 import { MotionDiv } from "@/components/atoms/framer/motion";
+import { useAuthStore } from "@/store/useAuthStore";
 
 const MAIN_MENU = [
   { name: "Roadmap", href: "/roadmap", icon: Map },
@@ -24,9 +27,10 @@ const MAIN_MENU = [
     name: "Learning", 
     icon: Bot,
     children: [
-      { name: "Video Lessons", href: "/learning/videoLearning" },
+      { name: "Course Catalog", href: "/learning/courses" },
+      { name: "Video Lessons", href: "/learning/videoLearning", hidden: true },
       { name: "Study Buddy", href: "/learning/study-budy" },
-      { name: "AI Task", href: "/learning/AiTask" },
+      { name: "AI Task", href: "/learning/AiTask", hidden: true },
     ]
   },
   { name: "Library", href: "/library", icon: BookOpen },
@@ -41,12 +45,22 @@ const MAIN_MENU = [
 ];
 
 const FOOTER_MENU = [
+  { name: "Courses & Modules", href: "/courses", icon: Layers, adminOnly: true },
+  { name: "AI Memory", href: "/memory", icon: Brain },
   { name: "Settings", href: "/settings", icon: Settings },
   { name: "Help", href: "/helpCenter", icon: HelpCircle },
 ];
 
 export default function SideBar() {
   const pathname = usePathname();
+  const [mounted, setMounted] = useState(false);
+  const { user } = useAuthStore();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isAdmin = mounted && user?.role === "admin";
 
   // STATE ACCORDION
   const [openMenu, setOpenMenu] = useState<string | null>("Dashboard");
@@ -205,32 +219,34 @@ export default function SideBar() {
                     exit={{ height: 0, opacity: 0 }}
                     className="flex flex-col mt-1 mb-2 bg-white rounded-md overflow-hidden shadow-[0_2px_10px_rgb(0,0,0,0.02)]"
                   >
-                    {item.children.map((child, index) => {
-                      const isChildActive = pathname === child.href;
-                      
-                      return (
-                        <Link key={child.name} href={child.href}>
-                          <div
-                            className={`px-12 py-3 transition-colors border-b border-slate-200 last:border-b-0 ${
-                            isChildActive 
-                              ? "bg-[#CEC5FF] hover:bg-[#C2B6FF]" 
-                              : "hover:bg-slate-200/60"
-                            }`}
-                          >
-                            <Text 
-                              as="span" 
-                              className={`text-[14px] ${
+                    {item.children
+                      .filter((child) => !child.hidden)
+                      .map((child, index) => {
+                        const isChildActive = pathname === child.href;
+
+                        return (
+                          <Link key={child.name} href={child.href}>
+                            <div
+                              className={`px-12 py-3 transition-colors border-b border-slate-200 last:border-b-0 ${
                                 isChildActive
-                                ? "font-extrabold text-indigo-dark" 
-                                : "font-bold text-slate-600 group-hover:text-slate-900"
+                                  ? "bg-[#CEC5FF] hover:bg-[#C2B6FF]"
+                                  : "hover:bg-slate-200/60"
                               }`}
                             >
-                              {child.name}
-                            </Text>
-                          </div>
-                        </Link>
-                      );
-                    })}
+                              <Text
+                                as="span"
+                                className={`text-[14px] ${
+                                  isChildActive
+                                    ? "font-extrabold text-indigo-dark"
+                                    : "font-bold text-slate-600 group-hover:text-slate-900"
+                                }`}
+                              >
+                                {child.name}
+                              </Text>
+                            </div>
+                          </Link>
+                        );
+                      })}
                   </MotionDiv>
                 )}
               </AnimatePresence>
@@ -242,16 +258,15 @@ export default function SideBar() {
       {/* FOOTER: Tombol CTA & Pengaturan */}
       {/* FOOTER: Tombol Quiz + Menu Bawah (Settings & Help) */}
       <div className="px-5 pb-8 pt-4 flex flex-col gap-2 shrink-0">
-
-        {/* Tombol Start Quiz */}
-        <Link href="/start-quiz" className="w-full">
+        {/* Tombol Start Quiz (Hidden) */}
+        {/* <Link href="/start-quiz" className="w-full">
           <button className="mb-2 w-full bg-[#5D44D8] text-white py-3.5 rounded-[16px] font-bold text-[15px] shadow-md shadow-[#5D44D8]/20 hover:bg-indigo-700 transition-colors active:scale-[0.98]">
             Start Quiz
           </button>
-        </Link>
+        </Link> */}
 
         {/* Pemetaan Menu Footer (Settings & Help) */}
-        {FOOTER_MENU.map((item) => {
+        {FOOTER_MENU.filter((item) => !item.adminOnly || isAdmin).map((item) => {
           const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
           return (
             <Link key={item.name} href={item.href}>

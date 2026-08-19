@@ -14,13 +14,16 @@ import {
   ChevronUp, 
   X,
   Settings,
-  HelpCircle 
+  HelpCircle,
+  Brain,
+  Layers,
 } from "lucide-react";
 import { MOCK_PROFILE } from "@/constants/mockData";
 import { AnimatePresence } from "framer-motion";
 import { useNavbarScroll } from "@/hooks/useNavbarScroll";
 import { Text } from "@/components/atoms/Typography";
 import { MotionDrawer, MotionHeader, MotionBackdrop, MotionDiv } from "@/components/atoms/framer/motion";
+import { useAuthStore } from "@/store/useAuthStore";
 
 const MAIN_MENU = [
   { name: "Roadmap", href: "/roadmap", icon: Map },
@@ -28,9 +31,10 @@ const MAIN_MENU = [
     name: "Learning", 
     icon: Bot,
     children: [
-      { name: "Video Lessons", href: "/learning/videoLearning" },
+      { name: "Course Catalog", href: "/learning/courses" },
+      { name: "Video Lessons", href: "/learning/videoLearning", hidden: true },
       { name: "Study Buddy", href: "/learning/study-budy" },
-      { name: "AI Task", href: "/learning/AiTask" },
+      { name: "AI Task", href: "/learning/AiTask", hidden: true },
     ]
   },
   { name: "Library", href: "/library", icon: BookOpen },
@@ -45,12 +49,25 @@ const MAIN_MENU = [
 ];
 
 const FOOTER_MENU = [
+  { name: "Courses & Modules", href: "/courses", icon: Layers, adminOnly: true },
+  { name: "AI Memory", href: "/memory", icon: Brain },
   { name: "Settings", href: "/settings", icon: Settings },
   { name: "Help", href: "/helpCenter", icon: HelpCircle },
 ];
 
 export default function NavBar() {
-  const initialLetter = MOCK_PROFILE.name.charAt(0).toUpperCase();
+  const [mounted, setMounted] = useState(false);
+  const { user } = useAuthStore();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const userName = mounted && user?.name ? user.name : MOCK_PROFILE.name;
+  const totalCoins = mounted && user?.coins !== undefined ? user.coins : MOCK_PROFILE.totalPoints;
+  const currentStreak = mounted && user?.streak_count !== undefined ? user.streak_count : MOCK_PROFILE.currentStreak;
+  const initialLetter = userName.charAt(0).toUpperCase();
+
   const y = useNavbarScroll(100);
   const pathname = usePathname();
 
@@ -77,12 +94,8 @@ export default function NavBar() {
       document.body.style.overflow = "unset";
     }
   }, [isMobileMenuOpen]);
-  if (pathname === "/settings") {
-    return null;
-  }
 
-
- return (
+  return (
     <>
       <MotionHeader style={{ y }} className="sticky top-4 z-40 mx-4 mt-4 flex h-[76px] items-center justify-between rounded-[24px] bg-white px-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] md:mx-8">
         <div className="flex items-center gap-3">
@@ -94,15 +107,15 @@ export default function NavBar() {
         <div className="flex items-center gap-3 md:gap-4">
           <div className="flex items-center gap-2.5 rounded-full bg-indigo-soft px-4 py-2.5 hidden sm:flex">
             <div className="flex h-6 w-6 items-center justify-center rounded-full bg-indigo-base text-[13px] font-bold text-white shadow-sm">$</div>
-            <span className="text-[15px] font-bold tracking-tight text-indigo-base">{MOCK_PROFILE.totalPoints.toLocaleString("id-ID")}</span>
+            <span className="text-[15px] font-bold tracking-tight text-indigo-base">{totalCoins.toLocaleString("id-ID")}</span>
           </div>
           <div className="flex items-center gap-2.5 rounded-full bg-amber-soft px-4 py-2.5">
             <Flame className="h-6 w-6 fill-amber-base text-amber-base" />
-            <span className="text-[15px] font-bold tracking-tight text-amber-dark">{MOCK_PROFILE.currentStreak}</span>
+            <span className="text-[15px] font-bold tracking-tight text-amber-dark">{currentStreak}</span>
           </div>
           <div className="ml-1 flex h-[46px] w-[46px] shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-full border-2 border-indigo-base bg-indigo-100 shadow-sm transition-transform hover:scale-105">
-            {MOCK_PROFILE.avatar ? (
-              <img src={MOCK_PROFILE.avatar as string} alt={MOCK_PROFILE.name} className="h-full w-full object-cover"/>
+            {mounted && user?.photo_url ? (
+              <img src={user.photo_url} alt={userName} className="h-full w-full object-cover"/>
             ) : (
               <span className="text-[18px] font-extrabold text-indigo-700">{initialLetter}</span>
             )}
@@ -138,30 +151,72 @@ export default function NavBar() {
                   }
 
                   const isMenuOpen = openMenu === item.name;
+                  const isAnyChildActive = item.children.some(
+                    (child) => pathname === child.href || pathname.startsWith(`${child.href}/`)
+                  );
 
                   return (
                     <div key={item.name} className="flex flex-col">
-                      <button onClick={() => toggleMenu(item.name)} className={`group flex items-center justify-between w-full px-5 py-3.5 transition-all duration-200 active:scale-[0.98] ${isMenuOpen ? "bg-[#CEC5FF] rounded-[40px]" : "hover:bg-slate-200/60 rounded-[20px]"}`}>
+                      <button
+                        onClick={() => toggleMenu(item.name)}
+                        className={`group flex items-center justify-between px-5 py-3.5 rounded-[20px] transition-all duration-200 ${
+                          isAnyChildActive ? "bg-indigo-50" : "hover:bg-slate-200/60"
+                        }`}
+                      >
                         <div className="flex items-center gap-4">
-                          <item.icon className={`w-[22px] h-[22px] transition-colors ${isMenuOpen ? "text-indigo-dark" : "text-slate-600 group-hover:text-slate-900"}`} strokeWidth={2.5} />
-                          <Text as="span" className={`text-[16px] tracking-tight transition-colors ${isMenuOpen ? "font-extrabold text-indigo-dark" : "font-bold text-slate-700 group-hover:text-slate-900"}`}>{item.name}</Text>
+                          <item.icon
+                            className={`w-[22px] h-[22px] transition-colors ${
+                              isAnyChildActive ? "text-indigo-600" : "text-slate-500 group-hover:text-slate-900"
+                            }`}
+                            strokeWidth={2.5}
+                          />
+                          <Text
+                            as="span"
+                            className={`text-[16px] tracking-tight transition-colors ${
+                              isAnyChildActive
+                                ? "font-extrabold text-indigo-900"
+                                : "font-bold text-slate-600 group-hover:text-slate-900"
+                            }`}
+                          >
+                            {item.name}
+                          </Text>
                         </div>
-                        {isMenuOpen ? <ChevronUp className="w-5 h-5 text-indigo-dark" /> : <ChevronDown className="w-5 h-5 text-slate-400 group-hover:text-slate-600" />}
+                        {isMenuOpen ? (
+                          <ChevronUp className="w-5 h-5 text-slate-500" />
+                        ) : (
+                          <ChevronDown className="w-5 h-5 text-slate-500" />
+                        )}
                       </button>
 
                       <AnimatePresence>
                         {isMenuOpen && (
-                          <MotionDiv initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="flex flex-col mt-1 mb-2 bg-white rounded-md overflow-hidden shadow-[0_2px_10px_rgb(0,0,0,0.02)] border border-slate-200">
-                            {item.children.map((child) => {
-                              const isChildActive = pathname === child.href;
-                              return (
-                                <Link key={child.name} href={child.href}>
-                                  <div className={`px-12 py-3 transition-colors border-b border-slate-200 last:border-b-0 ${isChildActive ? "bg-[#CEC5FF]" : "bg-white active:bg-slate-50"}`}>
-                                    <Text as="span" className={`text-[14px] ${isChildActive ? "font-bold text-slate-900" : "font-medium text-slate-700"}`}>{child.name}</Text>
-                                  </div>
-                                </Link>
-                              );
-                            })}
+                          <MotionDiv
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="overflow-hidden flex flex-col gap-1 pl-12 pr-2 py-1"
+                          >
+                            {item.children
+                              .filter((child) => !child.hidden)
+                              .map((child) => {
+                                const isChildActive = pathname === child.href;
+                                return (
+                                  <Link key={child.name} href={child.href}>
+                                    <div
+                                      className={`px-4 py-2.5 rounded-[14px] transition-all ${
+                                        isChildActive
+                                          ? "bg-[#CEC5FF] text-indigo-dark font-extrabold"
+                                          : "text-slate-500 hover:text-slate-900 hover:bg-slate-200/40 font-semibold"
+                                      }`}
+                                    >
+                                      <Text as="span" className="text-[14px]">
+                                        {child.name}
+                                      </Text>
+                                    </div>
+                                  </Link>
+                                );
+                              })}
                           </MotionDiv>
                         )}
                       </AnimatePresence>
@@ -169,28 +224,21 @@ export default function NavBar() {
                   );
                 })}
               </div>
-                
-              {/* FOOTER */}
-              <div className="px-5 pb-8 pt-4 flex flex-col gap-2 shrink-0 mt-auto border-t border-white/60">
-                <Link href="/start-quiz" className="w-full">
-                  <button className="mb-2 w-full bg-[#5D44D8] text-white py-3.5 rounded-[16px] font-bold text-[15px] shadow-md shadow-[#5D44D8]/20 hover:bg-indigo-700 transition-colors active:scale-[0.98]">
-                    Start Quiz
-                  </button>
-                </Link>
-                
-                {FOOTER_MENU.map((item) => {
-                  const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
+
+              {/* MENU FOOTER */}
+              <div className="px-5 py-4 border-t border-white/60 flex flex-col gap-1 shrink-0">
+                {FOOTER_MENU.filter((item) => !item.adminOnly || (mounted && user?.role === "admin")).map((item) => {
+                  const isActive = pathname === item.href;
                   return (
                     <Link key={item.name} href={item.href}>
-                      <div className={`group flex items-center gap-4 px-5 py-3.5 transition-all duration-200 active:scale-[0.98] ${isActive ? "bg-[#895CF7] rounded-[40px] text-white" : "hover:bg-slate-200/60 rounded-[20px]"}`}>
-                        <item.icon className={`w-[22px] h-[22px] transition-colors ${isActive ? "text-white" : "text-slate-500 group-hover:text-slate-900"}`} strokeWidth={2.5} />
-                        <Text as="span" className={`text-[16px] tracking-tight transition-colors ${isActive ? "font-extrabold text-white" : "font-bold text-slate-600 group-hover:text-slate-900"}`}>{item.name}</Text>
+                      <div className={`group flex items-center gap-4 px-5 py-3 rounded-[20px] transition-all ${isActive ? "bg-slate-200/80 font-bold text-slate-900" : "hover:bg-slate-200/60 text-slate-500"}`}>
+                        <item.icon className="w-5 h-5 text-slate-500 group-hover:text-slate-900" strokeWidth={2.5} />
+                        <Text as="span" className="text-[15px] font-bold">{item.name}</Text>
                       </div>
                     </Link>
                   );
                 })}
               </div>
-
             </MotionDrawer>
           </>
         )}

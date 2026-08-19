@@ -1,19 +1,27 @@
-// file: src/app/roleSelection/page.tsx
 "use client";
 
 import React from "react";
 import { useRouter } from "next/navigation";
-import RoleCard from "@/components/molecules/roleCard"; // Komponen RoleCard milikmu
+import RoleCard from "@/components/molecules/roleCard";
 import { Heading, Text } from "@/components/atoms/Typography";
 import FadeIn from "@/components/atoms/framer/FadeIn";
+import { useAuthStore } from "@/store/useAuthStore";
 
 export default function RoleSelectionPage() {
   const router = useRouter();
+  const { user, updateUserRole } = useAuthStore();
 
-  const handleRoleSelect = (role: "student" | "parent") => {
-    // Simpan role ke localStorage / state jika dibutuhkan nanti di backend / context
+  const handleRoleSelect = async (role: "student" | "parent") => {
     if (typeof window !== "undefined") {
       localStorage.setItem("user_role", role);
+    }
+
+    if (user?.id) {
+      try {
+        await updateUserRole(user.id, role === "student" ? "student" : "student");
+      } catch (err) {
+        console.error("Failed to update role on backend:", err);
+      }
     }
 
     if (role === "student") {
