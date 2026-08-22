@@ -52,16 +52,6 @@ Navigate to http://localhost:3000 in your browser to see the result.
 
 ```
 ai-learning-platform
-├─ API_DOCUMENTATION.md
-├─ components.json
-├─ deeptutor_memory_architecture.md
-├─ eslint.config.mjs
-├─ FE_BE_Integration_plan.md
-├─ next.config.ts
-├─ package-lock.json
-├─ package.json
-├─ postcss.config.mjs
-├─ Product Requirements Document-kelompok6.md
 ├─ public
 │  ├─ assets
 │  │  ├─ images
