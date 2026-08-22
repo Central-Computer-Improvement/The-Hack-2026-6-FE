@@ -1,44 +1,62 @@
-## Getting Started
+# AuraLearn
 
-First, run the development server:
+![AuraLearn Banner](https://img.shields.io/badge/AuraLearn-AI_Learning_Platform-6B4EFF?style=for-the-badge&logo=react)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+AuraLearn is a sleek, modern, and AI-driven educational platform designed to make learning engaging and interactive. Built with a strong focus on high-fidelity UI/UX, seamless micro-interactions, and a gamified progression system, AuraLearn pairs students with their learning co-pilot, Professor Paw, to explore tailored study modules.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ✨ Key Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+* **🤖 AI-Powered Modules:** Access to Video Lessons, Study Buddy, and AI Tasks tailored for dynamic learning.
+* **🎮 Gamification System:** Real-time tracking of user points (Coins) and daily learning Streaks.
+* **📱 Unified Navigation Architecture:** A highly responsive SideBar for desktop and a slide-in Mobile Drawer. Both utilize smart Accordion (single-open) logic to maintain a clean interface.
+* **🔐 Dynamic Authentication Flow:** A seamless, single-page Auth experience (Login/Signup) powered by Framer Motion for smooth sliding transitions without page reloads.
+* **⚙️ Modular Settings Dashboard:** A clean, organized settings page for Profile Details and Account Security with tailored read-only states and interaction feedback.
+* **✨ Smooth Micro-Interactions:** Custom hooks for scroll-to-hide navbars, isolated Framer Motion wrappers, and satisfying click feedbacks.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Tech Stack
 
-## Learn More
+This project is meticulously built utilizing modern frontend technologies and follows the **Atomic Design Methodology** to ensure maintainability, reusability, and maximum performance:
 
-To learn more about Next.js, take a look at the following resources:
+* **Framework:** [Next.js](https://nextjs.org/) (App Router)
+* **Library:** [React](https://react.dev/)
+* **Language:** [TypeScript](https://www.typescriptlang.org/)
+* **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+* **Animation:** [Framer Motion](https://www.framer.com/motion/)
+* **UI Components:** [shadcn/ui](https://ui.shadcn.com/)
+* **Icons:** [Lucide React](https://lucide.dev/)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🚀 Getting Started
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Follow these steps to run AuraLearn locally on your machine.
 
-## Deploy on Vercel
+### Prerequisites
+Make sure you have [Node.js](https://nodejs.org/) installed on your system.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Installation
+1. **Clone the repository:**
+   ```
+   git clone https://github.com/Central-Computer-Improvement/The-Hack-2026-6-FE.git
+2. Change Directory:
+   ```
+   cd auralearn
+3. Install dependencies:
+   ```
+    npm install
+4. Run the development server:
+   ```
+    npm run dev
+5. Open the app:
+Navigate to http://localhost:3000 in your browser to see the result.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-## Project tree
+## 📂 Project Structure
 
 ```
 ai-learning-platform
+├─ API_DOCUMENTATION.md
 ├─ components.json
+├─ deeptutor_memory_architecture.md
 ├─ eslint.config.mjs
+├─ FE_BE_Integration_plan.md
 ├─ next.config.ts
 ├─ package-lock.json
 ├─ package.json
@@ -46,51 +64,151 @@ ai-learning-platform
 ├─ Product Requirements Document-kelompok6.md
 ├─ public
 │  ├─ assets
-│  │  └─ images
-│  │     └─ prof-paw.webp
-│  ├─ file.svg
-│  ├─ globe.svg
-│  ├─ next.svg
-│  ├─ vercel.svg
-│  └─ window.svg
+│  │  ├─ images
+│  │  │  ├─ parents.webp
+│  │  │  ├─ prof-paw.webp
+│  │  │  ├─ README.md
+│  │  │  └─ student.webp
+│  │  └─ README.md
+│  └─ README.md
 ├─ README.md
 ├─ src
 │  ├─ app
 │  │  ├─ (dashboard)
-│  │  │  ├─ dashboard
+│  │  │  ├─ courses
+│  │  │  │  ├─ new
+│  │  │  │  │  └─ page.tsx
 │  │  │  │  └─ page.tsx
+│  │  │  ├─ dashboard
+│  │  │  │  ├─ progress
+│  │  │  │  │  ├─ page.tsx
+│  │  │  │  │  └─ README.md
+│  │  │  │  ├─ README.md
+│  │  │  │  └─ rewards
+│  │  │  │     ├─ page.tsx
+│  │  │  │     └─ README.md
+│  │  │  ├─ forgotPW
+│  │  │  ├─ help
+│  │  │  ├─ helpCenter
+│  │  │  │  ├─ page.tsx
+│  │  │  │  └─ README.md
 │  │  │  ├─ layout.tsx
-│  │  │  └─ library
-│  │  │     └─ page.tsx
+│  │  │  ├─ learning
+│  │  │  │  ├─ AiTask
+│  │  │  │  │  ├─ page.tsx
+│  │  │  │  │  └─ README.md
+│  │  │  │  ├─ courses
+│  │  │  │  │  ├─ page.tsx
+│  │  │  │  │  └─ [courseId]
+│  │  │  │  │     └─ page.tsx
+│  │  │  │  ├─ README.md
+│  │  │  │  ├─ study-budy
+│  │  │  │  │  ├─ page.tsx
+│  │  │  │  │  └─ README.md
+│  │  │  │  ├─ studyBuddy
+│  │  │  │  ├─ videoLearning
+│  │  │  │  │  ├─ page.tsx
+│  │  │  │  │  └─ README.md
+│  │  │  │  └─ videoLessons
+│  │  │  ├─ library
+│  │  │  │  ├─ page.tsx
+│  │  │  │  └─ README.md
+│  │  │  ├─ memory
+│  │  │  │  └─ page.tsx
+│  │  │  ├─ README.md
+│  │  │  ├─ roadmap
+│  │  │  │  ├─ page.tsx
+│  │  │  │  └─ README.md
+│  │  │  ├─ settings
+│  │  │  │  ├─ page.tsx
+│  │  │  │  └─ README.md
+│  │  │  └─ start-quiz
+│  │  │     ├─ page.tsx
+│  │  │     ├─ result
+│  │  │     │  └─ page.tsx
+│  │  │     ├─ review
+│  │  │     │  └─ page.tsx
+│  │  │     └─ session
+│  │  │        └─ page.tsx
 │  │  ├─ favicon.ico
 │  │  ├─ globals.css
 │  │  ├─ layout.tsx
-│  │  └─ page.tsx
+│  │  ├─ levelCheck
+│  │  │  ├─ level_1
+│  │  │  │  ├─ page.tsx
+│  │  │  │  └─ README.md
+│  │  │  └─ README.md
+│  │  ├─ page.tsx
+│  │  ├─ README.md
+│  │  └─ roleSelection
+│  │     ├─ page.tsx
+│  │     └─ README.md
 │  ├─ components
 │  │  ├─ atoms
+│  │  │  ├─ ButtonPill.tsx
+│  │  │  ├─ framer
+│  │  │  │  ├─ AnimatePresence.tsx
+│  │  │  │  ├─ FadeIn.tsx
+│  │  │  │  ├─ motion.tsx
+│  │  │  │  └─ README.md
 │  │  │  ├─ IconButton.tsx
 │  │  │  ├─ Logo.tsx
+│  │  │  ├─ progressLevelCheck.tsx
 │  │  │  ├─ PulseDot.tsx
+│  │  │  ├─ README.md
 │  │  │  ├─ StatsIndicator.tsx
 │  │  │  └─ Typography.tsx
 │  │  ├─ molecules
+│  │  │  ├─ CardWrapper.tsx
 │  │  │  ├─ ChatBubble.tsx
 │  │  │  ├─ ChatInput.tsx
+│  │  │  ├─ FaqAccordionItem.tsx
+│  │  │  ├─ HelpTopicCard.tsx
+│  │  │  ├─ keyTakeAwayPoin.tsx
+│  │  │  ├─ levelCard.tsx
+│  │  │  ├─ MarkdownRenderer.tsx
 │  │  │  ├─ ProfileIdentity.tsx
 │  │  │  ├─ QuizAction.tsx
+│  │  │  ├─ QuizChoiceOption.tsx
+│  │  │  ├─ quizInfoStats.tsx
 │  │  │  ├─ QuizOption.tsx
+│  │  │  ├─ QuizProgressHeader.tsx
+│  │  │  ├─ QuizResultStat.tsx
+│  │  │  ├─ QuizReviewOption.tsx
+│  │  │  ├─ QuizScoreRing.tsx
+│  │  │  ├─ README.md
+│  │  │  ├─ ReadOnlyInput.tsx
 │  │  │  ├─ RewardCard.tsx
+│  │  │  ├─ roleCard.tsx
+│  │  │  ├─ SearchInput.tsx
 │  │  │  ├─ SelectionCard.tsx
 │  │  │  └─ UploadDropzone.tsx
 │  │  ├─ organisms
 │  │  │  ├─ ActiveMiniQuiz.tsx
+│  │  │  ├─ AIVideo.tsx
+│  │  │  ├─ ContactSupportBanner.tsx
+│  │  │  ├─ FaqAccordion.tsx
+│  │  │  ├─ HelpTopicGrid.tsx
+│  │  │  ├─ lessonSideBar.tsx
 │  │  │  ├─ MaterialUploader.tsx
 │  │  │  ├─ NavBar.tsx
+│  │  │  ├─ QuizQuestionPanel.tsx
+│  │  │  ├─ QuizResultCard.tsx
+│  │  │  ├─ QuizReviewQuestionCard.tsx
+│  │  │  ├─ quizStartCard.tsx
+│  │  │  ├─ README.md
 │  │  │  ├─ RewardRoom.tsx
 │  │  │  ├─ SideBar.tsx
 │  │  │  ├─ TaskSplitter.tsx
 │  │  │  └─ YourProgress.tsx
+│  │  ├─ README.md
 │  │  ├─ templates
+│  │  │  ├─ HelpCenterTemplate.tsx
+│  │  │  ├─ QuizResultTemplate.tsx
+│  │  │  ├─ QuizReviewTemplate.tsx
+│  │  │  ├─ QuizSessionTemplate.tsx
+│  │  │  ├─ quizStartTamplate.tsx
+│  │  │  └─ README.md
 │  │  └─ ui
 │  │     ├─ avatar.tsx
 │  │     ├─ badge.tsx
@@ -100,65 +218,46 @@ ai-learning-platform
 │  │     ├─ dialog.tsx
 │  │     ├─ input.tsx
 │  │     ├─ progress.tsx
+│  │     ├─ README.md
 │  │     ├─ select.tsx
 │  │     ├─ separator.tsx
 │  │     ├─ sheet.tsx
 │  │     ├─ tabs.tsx
 │  │     └─ textarea.tsx
 │  ├─ constants
-│  │  └─ mockData.ts
+│  │  ├─ helpCenterMock.ts
+│  │  ├─ mockData.ts
+│  │  ├─ quizSessionMock.ts
+│  │  ├─ quizStartMock.ts
+│  │  └─ README.md
 │  ├─ hooks
+│  │  ├─ README.md
+│  │  ├─ useBasicWebSocket.ts
+│  │  ├─ useChatWebSocket.ts
 │  │  ├─ useMediaQuery.ts
 │  │  ├─ useNavbarScroll.ts
-│  │  └─ usePasswordVisibility.ts
+│  │  ├─ usePasswordVisibility.ts
+│  │  ├─ useQuizAttempt.ts
+│  │  └─ useQuizTimer.ts
 │  ├─ lib
+│  │  ├─ api.ts
 │  │  ├─ formatter.ts
+│  │  ├─ quizAttemptStorage.ts
+│  │  ├─ README.md
 │  │  └─ utils.ts
+│  ├─ README.md
 │  ├─ store
+│  │  ├─ README.md
 │  │  ├─ useAuthStore.ts
+│  │  ├─ useProgressStore.ts
 │  │  └─ useUIStore.ts
 │  └─ types
+│     ├─ help-center.ts
+│     ├─ index.ts
+│     ├─ quiz start.ts
+│     └─ README.md
 ├─ tailwind.config.ts
 ├─ tsconfig.json
 └─ workflow-git.md
 
 ```
-
-<!-- tree generated by markdown-notes-tree starts here -->
-
-- [**public**](public)
-    - [**assets**](public/assets)
-        - [**images**](public/assets/images)
-- [**src**](src)
-    - [**app**](src/app)
-        - [**(dashboard)**](src/app/\(dashboard\))
-            - [**dashboard**](src/app/\(dashboard\)/dashboard)
-                - [**progress**](src/app/\(dashboard\)/dashboard/progress)
-                - [**rewards**](src/app/\(dashboard\)/dashboard/rewards)
-            - [**helpCenter**](src/app/\(dashboard\)/helpCenter)
-            - [**learning**](src/app/\(dashboard\)/learning)
-                - [**AiTask**](src/app/\(dashboard\)/learning/AiTask)
-                - [**study-budy**](src/app/\(dashboard\)/learning/study-budy)
-                - [**videoLearning**](src/app/\(dashboard\)/learning/videoLearning)
-            - [**library**](src/app/\(dashboard\)/library)
-            - [**roadmap**](src/app/\(dashboard\)/roadmap)
-            - [**settings**](src/app/\(dashboard\)/settings)
-        - [**levelCheck**](src/app/levelCheck)
-            - [**level\_1**](src/app/levelCheck/level\_1)
-        - [**roleSelection**](src/app/roleSelection)
-    - [**components**](src/components)
-        - [**atoms**](src/components/atoms)
-            - [**framer**](src/components/atoms/framer)
-        - [**molecules**](src/components/molecules)
-        - [**organisms**](src/components/organisms)
-        - [**templates**](src/components/templates)
-        - [**ui**](src/components/ui)
-    - [**constants**](src/constants)
-    - [**hooks**](src/hooks)
-    - [**lib**](src/lib)
-    - [**store**](src/store)
-    - [**types**](src/types)
-- [📄 Product Requirements Document (PRD)](<Product Requirements Document-kelompok6.md>)
-- [Workflow Git Kolaborasi — Proyek Intelliweb](workflow-git.md)
-
-<!-- tree generated by markdown-notes-tree ends here -->
